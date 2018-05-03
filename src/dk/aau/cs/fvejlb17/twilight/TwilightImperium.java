@@ -1,5 +1,7 @@
 package dk.aau.cs.fvejlb17.twilight;
 
+import dk.aau.cs.fvejlb17.twilight.units.Dreadnought;
+
 public class TwilightImperium {
 
     public static void main(String[] args) {
@@ -9,5 +11,7 @@ public class TwilightImperium {
         System.out.println(player01.toString());
         System.out.println(player02.toString());
 
+        Dreadnought dreadnought01 = new Dreadnought();
+        dreadnought01.getCapacity();
     }
 }

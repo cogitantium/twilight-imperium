@@ -1,4 +1,6 @@
-package dk.aau.cs.fvejlb17.twilight;
+package dk.aau.cs.fvejlb17.twilight.units;
+
+import dk.aau.cs.fvejlb17.twilight.Player;
 
 public interface Units {
 
