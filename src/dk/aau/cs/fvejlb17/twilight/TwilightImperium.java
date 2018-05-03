@@ -11,7 +11,7 @@ public class TwilightImperium {
         System.out.println(player01.toString());
         System.out.println(player02.toString());
 
-        Dreadnought dreadnought01 = new Dreadnought();
-        dreadnought01.getCapacity();
+        Dreadnought dreadnought01 = new Dreadnought(player01);
+        System.out.println(dreadnought01.getCombatValue());
     }
 }
