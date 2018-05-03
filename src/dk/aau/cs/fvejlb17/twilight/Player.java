@@ -2,6 +2,7 @@ package dk.aau.cs.fvejlb17.twilight;
 
 import java.util.Objects;
 
+//TODO numPlayers must be at least 2 and at most 6
 public class Player {
 
     private String name;
