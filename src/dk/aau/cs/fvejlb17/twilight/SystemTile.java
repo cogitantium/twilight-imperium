@@ -5,7 +5,7 @@ import dk.aau.cs.fvejlb17.twilight.units.Ships;
 
 import java.util.List;
 
-public abstract class SystemTile {
+public class SystemTile {
 
     private List<SystemTile> neightborSystemTiles;
     private List<Ships> shipsInSystem;
