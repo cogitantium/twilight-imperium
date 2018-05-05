@@ -20,9 +20,8 @@ public class TwilightImperium {
         Dreadnought dreadnought02 = new Dreadnought(player01);
         Destroyer destroyer01 = new Destroyer(player01);
 
-        //create and add player01 ships to UnitList
-        UnitList unitList01 = new UnitList();
-        unitList01.add(dreadnought01); unitList01.add(dreadnought02); unitList01.add(destroyer01);
+        //create and add player01 ships to UnitList with builder
+        UnitList unitList01 = new UnitListBuilder().addUnit(dreadnought01).addUnit(dreadnought02).addUnit(destroyer01).build();
 
         //player02/red ships
         Cruiser cruiser01 = new Cruiser(player02);
@@ -30,8 +29,7 @@ public class TwilightImperium {
         Carrier carrier01 = new Carrier(player02);
 
         //create and add player02 ships to UnitList
-        UnitList unitList02 = new UnitList();
-        unitList02.add(cruiser01); unitList02.add(cruiser02); unitList02.add(carrier01);
+        UnitList unitList02 = new UnitListBuilder().addUnit(cruiser01).addUnit(cruiser02).addUnit(carrier01).build();
 
         //create planets with sensible resource production
         Planet mecatolRex = new Planet("Mecatol Rex", 6);
@@ -72,7 +70,6 @@ public class TwilightImperium {
 
         //create galaxy
         Galaxy galaxy01 = new Galaxy(systemTileList01);
-        galaxy01.getAllPlanetsInGalaxy();
 
     }
 
