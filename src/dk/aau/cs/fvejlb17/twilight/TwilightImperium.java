@@ -36,10 +36,10 @@ public class TwilightImperium {
         Planet mecatolRex = new Planet("Mecatol Rex", 6);
         Planet vegaMinor = new Planet("Vega Minor", 2);
         Planet vegaMajor = new Planet("Vega Major", 5);
-        Planet industrex= new Planet("Industrex", 6);
-        Planet rigelOne= new Planet("Rigel I", 2);
-        Planet rigelTwo= new Planet("Rigel II", 4);
-        Planet mirage= new Planet("Mirage", 3);
+        Planet industrex = new Planet("Industrex", 6);
+        Planet rigelOne = new Planet("Rigel I", 2);
+        Planet rigelTwo = new Planet("Rigel II", 4);
+        Planet mirage = new Planet("Mirage", 3);
 
         //create PlanetLists
         PlanetList centerPlanets = new PlanetListBuilder().addPlanet(mecatolRex).build();
@@ -51,13 +51,13 @@ public class TwilightImperium {
         PlanetList northWestPlanets = new PlanetListBuilder().addPlanet(mirage).build();
 
         //create SystemTiles
-        SystemTile centerSystem = new SystemTile(unitList01, centerPlanets);
-        SystemTile northSystem = new SystemTile(unitList02, northPlanets);
-        SystemTile northEastSystem = new SystemTile();
-        SystemTile southEastSystem = new SystemTile(southEastPlanets);
-        SystemTile southSystem = new SystemTile(southPlanets);
-        SystemTile southWestSystem = new SystemTile();
-        SystemTile northWestSystem = new SystemTile(northWestPlanets);
+        SystemTile centerSystem = new SystemTile(SystemTile.SystemPosition.c, unitList01, centerPlanets);
+        SystemTile northSystem = new SystemTile(SystemTile.SystemPosition.n, unitList02, northPlanets);
+        SystemTile northEastSystem = new SystemTile(SystemTile.SystemPosition.ne);
+        SystemTile southEastSystem = new SystemTile(SystemTile.SystemPosition.se, southEastPlanets);
+        SystemTile southSystem = new SystemTile(SystemTile.SystemPosition.s, southPlanets);
+        SystemTile southWestSystem = new SystemTile(SystemTile.SystemPosition.sw);
+        SystemTile northWestSystem = new SystemTile(SystemTile.SystemPosition.nw, northWestPlanets);
 
         //create SystemTileList and add all SystemTiles
         SystemTileList systemTileList01 = new SystemTileList();
@@ -71,6 +71,7 @@ public class TwilightImperium {
 
         //create galaxy
         Galaxy galaxy01 = new Galaxy(systemTileList01);
+        System.out.println("Galaxy contains industrex: " + galaxy01.galaxyContainsShips(dreadnought01));
 
     }
 
