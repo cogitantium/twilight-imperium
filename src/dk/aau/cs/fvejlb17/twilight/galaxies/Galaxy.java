@@ -3,6 +3,7 @@ package dk.aau.cs.fvejlb17.twilight.galaxies;
 import dk.aau.cs.fvejlb17.twilight.planets.PlanetList;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemTile;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemTileList;
+import dk.aau.cs.fvejlb17.twilight.units.Ships;
 import dk.aau.cs.fvejlb17.twilight.units.UnitList;
 
 public class Galaxy {
@@ -39,4 +40,10 @@ public class Galaxy {
         return allPlanetsInGalaxy;
     }
 
+    public boolean galaxyContainsShips(Ships ship) {
+        for (SystemTile st : this.getAllSystemsInGalaxy()) {
+            if (st.getAllShipsInSystemTile().contains(ship)) return true;
+        }
+        return false;
+    }
 }
