@@ -14,6 +14,8 @@ public class Galaxy {
         this.systemTilesInGalaxy = systemTilesInGalaxy;
     }
 
+    public Galaxy() {}
+
     public SystemTileList getAllSystemsInGalaxy() {
         return systemTilesInGalaxy;
     }
