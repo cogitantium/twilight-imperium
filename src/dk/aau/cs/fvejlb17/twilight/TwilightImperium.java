@@ -3,6 +3,7 @@ package dk.aau.cs.fvejlb17.twilight;
 import dk.aau.cs.fvejlb17.twilight.galaxies.Galaxy;
 import dk.aau.cs.fvejlb17.twilight.planets.Planet;
 import dk.aau.cs.fvejlb17.twilight.planets.PlanetList;
+import dk.aau.cs.fvejlb17.twilight.planets.PlanetListBuilder;
 import dk.aau.cs.fvejlb17.twilight.players.Player;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemTile;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemTileList;
@@ -41,13 +42,13 @@ public class TwilightImperium {
         Planet mirage= new Planet("Mirage", 3);
 
         //create PlanetLists
-        PlanetList centerPlanets = new PlanetList(); centerPlanets.add(mecatolRex);
-        PlanetList northPlanets = new PlanetList(); northPlanets.add(vegaMinor); northPlanets.add(vegaMajor);
-        //omitting PlanetList northEastPlanets = new PlanetList();
-        PlanetList southEastPlanets = new PlanetList(); southEastPlanets.add(industrex);
-        PlanetList southPlanets = new PlanetList(); southPlanets.add(rigelOne); southPlanets.add(rigelTwo);
-        // omitting PlanetList southWestPlanets = new PlanetList();
-        PlanetList northWestPlanets = new PlanetList(); northWestPlanets.add(mirage);
+        PlanetList centerPlanets = new PlanetListBuilder().addPlanet(mecatolRex).build();
+        PlanetList northPlanets = new PlanetListBuilder().addPlanet(vegaMinor).addPlanet(vegaMajor).build();
+        PlanetList northEastPlanets = new PlanetListBuilder().build();
+        PlanetList southEastPlanets = new PlanetListBuilder().addPlanet(industrex).build();
+        PlanetList southPlanets = new PlanetListBuilder().addPlanet(rigelOne).addPlanet(rigelTwo).build();
+        PlanetList southWestPlanets = new PlanetListBuilder().build();
+        PlanetList northWestPlanets = new PlanetListBuilder().addPlanet(mirage).build();
 
         //create SystemTiles
         SystemTile centerSystem = new SystemTile(unitList01, centerPlanets);
@@ -73,9 +74,4 @@ public class TwilightImperium {
 
     }
 
-    /*
-    public Galaxy buildGame() {
-
-    }
-    */
 }
