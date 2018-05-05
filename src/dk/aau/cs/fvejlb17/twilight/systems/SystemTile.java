@@ -1,30 +1,38 @@
 package dk.aau.cs.fvejlb17.twilight.systems;
 
-import dk.aau.cs.fvejlb17.twilight.planets.Planet;
+import dk.aau.cs.fvejlb17.twilight.planets.PlanetList;
 import dk.aau.cs.fvejlb17.twilight.units.Ships;
 import dk.aau.cs.fvejlb17.twilight.units.UnitList;
-
-import java.util.List;
 
 public class SystemTile {
 
     private UnitList shipsInSystem;
-    private List<Planet> planetsInSystem;
+    private PlanetList planetsInSystem;
 
-    protected SystemTile( UnitList shipsInSystem, List<Planet> planetsInSystem) {
+    public SystemTile(UnitList shipsInSystem, PlanetList planetsInSystem) {
         this.shipsInSystem = shipsInSystem;
         this.planetsInSystem = planetsInSystem;
     }
 
-    public boolean shipEnterSystem(Ships ship) {
+    public SystemTile(PlanetList planetsInSystem) {
+        this.planetsInSystem = planetsInSystem;
+    }
+
+    public SystemTile() {}
+
+    public boolean shipEnterSystemTile(Ships ship) {
         return this.shipsInSystem.add(ship);
     }
 
-    public boolean shipLeaveSystem(Ships ship) {
+    public boolean shipLeaveSystemTile(Ships ship) {
         return this.shipsInSystem.remove(ship);
     }
 
-     public UnitList getAllShipsInSystem() {
-        return this.shipsInSystem;
+     public UnitList getAllShipsInSystemTile() {
+        return shipsInSystem;
+    }
+
+    public PlanetList getAllPlanetsInSystemTile() {
+        return planetsInSystem;
     }
 }
