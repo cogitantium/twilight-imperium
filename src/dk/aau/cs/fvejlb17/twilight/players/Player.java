@@ -2,7 +2,7 @@ package dk.aau.cs.fvejlb17.twilight.players;
 
 import java.util.Objects;
 
-//TODO numPlayers must be at least 2 and at most 6
+//TODO numPlayers must be at least 2 and at most 6, colour and race must be unique
 public class Player {
 
     private String name;
