@@ -13,8 +13,6 @@ public class UnitListBuilder {
     }
 
     public UnitList build() {
-        UnitList returnUnitList = new UnitList();
-        returnUnitList.addAll(unitList);
-        return returnUnitList;
+        return unitList;
     }
 }
