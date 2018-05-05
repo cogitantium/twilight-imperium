@@ -1,4 +1,4 @@
-package dk.aau.cs.fvejlb17.twilight;
+package dk.aau.cs.fvejlb17.twilight.players;
 
 import java.util.Objects;
 
