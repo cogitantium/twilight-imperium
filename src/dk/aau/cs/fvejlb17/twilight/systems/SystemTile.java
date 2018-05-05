@@ -1,18 +1,17 @@
-package dk.aau.cs.fvejlb17.twilight;
+package dk.aau.cs.fvejlb17.twilight.systems;
 
 import dk.aau.cs.fvejlb17.twilight.planets.Planet;
 import dk.aau.cs.fvejlb17.twilight.units.Ships;
+import dk.aau.cs.fvejlb17.twilight.units.UnitList;
 
 import java.util.List;
 
 public class SystemTile {
 
-    private List<SystemTile> neightborSystemTiles;
-    private List<Ships> shipsInSystem;
+    private UnitList shipsInSystem;
     private List<Planet> planetsInSystem;
 
-    protected SystemTile(List<SystemTile> neightborSystemTiles, List<Ships> shipsInSystem, List<Planet> planetsInSystem) {
-        this.neightborSystemTiles = neightborSystemTiles;
+    protected SystemTile( UnitList shipsInSystem, List<Planet> planetsInSystem) {
         this.shipsInSystem = shipsInSystem;
         this.planetsInSystem = planetsInSystem;
     }
@@ -25,7 +24,7 @@ public class SystemTile {
         return this.shipsInSystem.remove(ship);
     }
 
-    public List<Ships> getAllShipsInSystem() {
+     public UnitList getAllShipsInSystem() {
         return this.shipsInSystem;
     }
 }

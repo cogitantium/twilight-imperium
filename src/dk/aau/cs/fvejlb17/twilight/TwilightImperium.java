@@ -1,6 +1,7 @@
 package dk.aau.cs.fvejlb17.twilight;
 
 import dk.aau.cs.fvejlb17.twilight.planets.Planet;
+import dk.aau.cs.fvejlb17.twilight.players.Player;
 import dk.aau.cs.fvejlb17.twilight.units.*;
 
 public class TwilightImperium {
