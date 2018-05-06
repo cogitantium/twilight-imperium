@@ -1,4 +1,4 @@
-package dk.aau.cs.fvejlb17.twilight;
+package dk.aau.cs.fvejlb17.twilight.players;
 
 import dk.aau.cs.fvejlb17.twilight.players.Player;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ class PlayerTest {
         Player player02 = new Player("Player01", "Race01", "Red");
         Player player03 = new Player("Player02", "Race01", "Red");
         assertTrue(player01.equals(player02));
-        assertTrue(player02.equals(player03));
+        assertTrue(player02.equals(player01));
         assertFalse(player01.equals(player03));
     }
 
