@@ -6,7 +6,11 @@ class GalaxyCardinalPositionException extends Exception {
         super("ERROR: Cardinal positions are not congruent!");
     }
 
-    GalaxyCardinalPositionException(String message) {
-        super("ERROR: Cardinal positions are not congruent! " + message);
+    GalaxyCardinalPositionException(String position) {
+        super("ERROR: Cardinal positions at " + position + " are not congruent!");
+    }
+
+    GalaxyCardinalPositionException(String level, String message) {
+        super(level + ": Cardinal positions are not congruent! " + message);
     }
 }
