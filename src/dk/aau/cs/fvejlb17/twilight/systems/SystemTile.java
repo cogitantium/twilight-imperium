@@ -8,7 +8,7 @@ public class SystemTile {
 
     private final SystemPosition systemPosition;
     private SystemTilePositionList neighbourSystemTiles;
-    private UnitList shipsInSystem;
+    private UnitList shipsInSystem = new UnitList();
     private PlanetList planetsInSystem;
 
     public SystemTile(SystemPosition systemPosition, UnitList shipsInSystem, PlanetList planetsInSystem) {
