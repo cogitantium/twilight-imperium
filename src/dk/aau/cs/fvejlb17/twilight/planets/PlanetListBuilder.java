@@ -2,7 +2,7 @@ package dk.aau.cs.fvejlb17.twilight.planets;
 
 public class PlanetListBuilder {
 
-    private PlanetList planetList = new PlanetList();
+    private final PlanetList planetList = new PlanetList();
 
     public PlanetListBuilder addPlanet(Planet planet) {
         try {

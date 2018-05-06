@@ -5,9 +5,9 @@ import java.util.Objects;
 //TODO numPlayers must be at least 2 and at most 6, colour and race must be unique
 public class Player {
 
-    private String name;
-    private String race;
-    private String colour;
+    private final String name;
+    private final String race;
+    private final String colour;
 
     public Player(String name, String race, String colour) {
         this.name = name;

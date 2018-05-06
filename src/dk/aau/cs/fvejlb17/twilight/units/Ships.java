@@ -4,13 +4,13 @@ import dk.aau.cs.fvejlb17.twilight.players.Player;
 
 public abstract class Ships implements Units {
 
-    private Player owner;
-    private int resourceCost;
-    private int combatValue;
-    private int movementSpeed;
-    private int capacity;
+    private final Player owner;
+    private final int resourceCost;
+    private final int combatValue;
+    private final int movementSpeed;
+    private final int capacity;
 
-    protected Ships(Player owner, int resourceCost, int combatValue, int movementSpeed, int capacity) {
+    Ships(Player owner, int resourceCost, int combatValue, int movementSpeed, int capacity) {
         this.owner = owner;
         this.resourceCost = resourceCost;
         this.combatValue = combatValue;

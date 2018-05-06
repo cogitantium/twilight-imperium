@@ -1,7 +1,7 @@
 package dk.aau.cs.fvejlb17.twilight.units;
 
 public class UnitListBuilder {
-    private UnitList unitList = new UnitList();
+    private final UnitList unitList = new UnitList();
 
     public UnitListBuilder addUnit(Ships ship) {
         try {

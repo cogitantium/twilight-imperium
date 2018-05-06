@@ -4,6 +4,7 @@ import dk.aau.cs.fvejlb17.twilight.planets.Planet;
 import dk.aau.cs.fvejlb17.twilight.planets.PlanetList;
 import dk.aau.cs.fvejlb17.twilight.planets.PlanetListBuilder;
 import dk.aau.cs.fvejlb17.twilight.players.Player;
+import dk.aau.cs.fvejlb17.twilight.systems.SystemPosition;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemTile;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemTileList;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemTileListBuilder;
@@ -48,13 +49,13 @@ public class GalaxyCreator {
         PlanetList northWestPlanets = new PlanetListBuilder().addPlanet(mirage).build();
 
         //create SystemTiles with preset definitions
-        SystemTile centerSystem = new SystemTile(SystemTile.SystemPosition.C, unitList01, centerPlanets);
-        SystemTile northSystem = new SystemTile(SystemTile.SystemPosition.N, unitList02, northPlanets);
-        SystemTile northEastSystem = new SystemTile(SystemTile.SystemPosition.NE);
-        SystemTile southEastSystem = new SystemTile(SystemTile.SystemPosition.SE, southEastPlanets);
-        SystemTile southSystem = new SystemTile(SystemTile.SystemPosition.S, southPlanets);
-        SystemTile southWestSystem = new SystemTile(SystemTile.SystemPosition.SW);
-        SystemTile northWestSystem = new SystemTile(SystemTile.SystemPosition.NW, northWestPlanets);
+        SystemTile centerSystem = new SystemTile(SystemPosition.C, unitList01, centerPlanets);
+        SystemTile northSystem = new SystemTile(SystemPosition.N, unitList02, northPlanets);
+        SystemTile northEastSystem = new SystemTile(SystemPosition.NE);
+        SystemTile southEastSystem = new SystemTile(SystemPosition.SE, southEastPlanets);
+        SystemTile southSystem = new SystemTile(SystemPosition.S, southPlanets);
+        SystemTile southWestSystem = new SystemTile(SystemPosition.SW);
+        SystemTile northWestSystem = new SystemTile(SystemPosition.NW, northWestPlanets);
 
         //create SystemTileList with builder and add all SystemTiles
         SystemTileList systemTileList = new SystemTileListBuilder().addSystemTile(centerSystem).addSystemTile(northSystem)

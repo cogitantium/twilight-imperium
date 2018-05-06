@@ -1,8 +1,10 @@
 package dk.aau.cs.fvejlb17.twilight;
 
 import dk.aau.cs.fvejlb17.twilight.galaxies.*;
+import dk.aau.cs.fvejlb17.twilight.systems.SystemPosition;
+import dk.aau.cs.fvejlb17.twilight.systems.SystemTile;
 
-public class TwilightImperium {
+class TwilightImperium {
 
     public static void main(String[] args) {
 
@@ -10,6 +12,7 @@ public class TwilightImperium {
         Galaxy presetGalaxy = galaxyCreator.createPresetGame();
         System.out.println("check cardinal congruency " + presetGalaxy.checkGalaxyLegality());
 
+        System.out.println(SystemPosition.C.toString());
 
     }
 }
