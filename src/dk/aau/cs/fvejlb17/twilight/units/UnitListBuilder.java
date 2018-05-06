@@ -4,11 +4,7 @@ public class UnitListBuilder {
     private final UnitList unitList = new UnitList();
 
     public UnitListBuilder addUnit(Ships ship) {
-        try {
-            this.unitList.add(ship);
-        } catch (Exception e) {
-            System.out.println("ERROR: " + e.getMessage());
-        }
+        this.unitList.add(ship);
         return this;
     }
 
