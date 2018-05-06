@@ -2,10 +2,7 @@ package dk.aau.cs.fvejlb17.twilight.galaxies;
 
 import dk.aau.cs.fvejlb17.twilight.planets.Planet;
 import dk.aau.cs.fvejlb17.twilight.planets.PlanetList;
-import dk.aau.cs.fvejlb17.twilight.systems.SystemTile;
-import dk.aau.cs.fvejlb17.twilight.systems.SystemTileList;
-import dk.aau.cs.fvejlb17.twilight.systems.SystemTilePositionList;
-import dk.aau.cs.fvejlb17.twilight.systems.SystemTilePositionListBuilder;
+import dk.aau.cs.fvejlb17.twilight.systems.*;
 import dk.aau.cs.fvejlb17.twilight.units.Ships;
 import dk.aau.cs.fvejlb17.twilight.units.UnitList;
 
@@ -15,13 +12,13 @@ import java.util.Set;
 
 public class Galaxy {
 
-    private SystemTileList systemTilesInGalaxy;
+    private final SystemTileList systemTilesInGalaxy;
 
-    public Galaxy(SystemTileList systemTilesInGalaxy) {
+    Galaxy(SystemTileList systemTilesInGalaxy) {
         this.systemTilesInGalaxy = systemTilesInGalaxy;
     }
 
-    public SystemTileList getAllSystemsInGalaxy() {
+    private SystemTileList getAllSystemsInGalaxy() {
         return systemTilesInGalaxy;
     }
 
@@ -35,7 +32,7 @@ public class Galaxy {
     }
 
     //for all SystemTiles add all Planets to allPlanetsInGalaxy
-    public PlanetList getAllPlanetsInGalaxy() {
+    private PlanetList getAllPlanetsInGalaxy() {
         PlanetList allPlanetsInGalaxy = new PlanetList();
         //for all SystemTiles, if SystemTile contains planets, add all planets and catch NPE if unexpected
         for (SystemTile systemTile : systemTilesInGalaxy) {
@@ -103,23 +100,23 @@ public class Galaxy {
     private boolean checkCardinalCongruencyOfSystemPositions() throws GalaxyCardinalPositionException {
         //create expected neighbours as SystemTilePositionList, omitting center system as case is handled independently
         SystemTilePositionList expectedNeighboursN = new SystemTilePositionListBuilder()
-                .addNeighbour(SystemTile.SystemPosition.NW).addNeighbour(SystemTile.SystemPosition.NE)
-                .addNeighbour(SystemTile.SystemPosition.C).build();
+                .addNeighbour(SystemPosition.NW).addNeighbour(SystemPosition.NE)
+                .addNeighbour(SystemPosition.C).build();
         SystemTilePositionList expectedNeighboursNE = new SystemTilePositionListBuilder()
-                .addNeighbour(SystemTile.SystemPosition.N).addNeighbour(SystemTile.SystemPosition.SE)
-                .addNeighbour(SystemTile.SystemPosition.C).build();
+                .addNeighbour(SystemPosition.N).addNeighbour(SystemPosition.SE)
+                .addNeighbour(SystemPosition.C).build();
         SystemTilePositionList expectedNeighboursSE = new SystemTilePositionListBuilder()
-                .addNeighbour(SystemTile.SystemPosition.NE).addNeighbour(SystemTile.SystemPosition.S)
-                .addNeighbour(SystemTile.SystemPosition.C).build();
+                .addNeighbour(SystemPosition.NE).addNeighbour(SystemPosition.S)
+                .addNeighbour(SystemPosition.C).build();
         SystemTilePositionList expectedNeighboursS = new SystemTilePositionListBuilder()
-                .addNeighbour(SystemTile.SystemPosition.SE).addNeighbour(SystemTile.SystemPosition.SW)
-                .addNeighbour(SystemTile.SystemPosition.C).build();
+                .addNeighbour(SystemPosition.SE).addNeighbour(SystemPosition.SW)
+                .addNeighbour(SystemPosition.C).build();
         SystemTilePositionList expectedNeighboursSW = new SystemTilePositionListBuilder()
-                .addNeighbour(SystemTile.SystemPosition.S).addNeighbour(SystemTile.SystemPosition.NW)
-                .addNeighbour(SystemTile.SystemPosition.C).build();
+                .addNeighbour(SystemPosition.S).addNeighbour(SystemPosition.NW)
+                .addNeighbour(SystemPosition.C).build();
         SystemTilePositionList expectedNeighboursNW = new SystemTilePositionListBuilder()
-                .addNeighbour(SystemTile.SystemPosition.SW).addNeighbour(SystemTile.SystemPosition.N)
-                .addNeighbour(SystemTile.SystemPosition.C).build();
+                .addNeighbour(SystemPosition.SW).addNeighbour(SystemPosition.N)
+                .addNeighbour(SystemPosition.C).build();
 
         //for all SystemTiles in Galaxy do
         for (SystemTile systemTile : this.systemTilesInGalaxy) {
@@ -127,9 +124,9 @@ public class Galaxy {
             switch (systemTile.getSystemPosition()) {
                 case C:
                     //for all SystemPositions in enum, do check
-                    for (SystemTile.SystemPosition systemPosition : SystemTile.SystemPosition.values()) {
+                    for (SystemPosition systemPosition : SystemPosition.values()) {
                         //if checked SystemPosition is not systemTile itself, do check
-                        if (!(systemPosition == SystemTile.SystemPosition.C))
+                        if (!(systemPosition == SystemPosition.C))
                             //if systemTile does not contain all but itself as neighbours, return false
                             if (systemTile.getNeighbourSystemTiles().contains(systemPosition)) break;
                             else return false;
@@ -138,7 +135,7 @@ public class Galaxy {
                     //check if system containsAll with expected neighbours, if true, break and continue, else return false
                 case N:
                     if (systemTile.getNeighbourSystemTiles().containsAll(expectedNeighboursN)) break;
-                    else throw new GalaxyCardinalPositionException();
+                    else throw new GalaxyCardinalPositionException(systemTile.getSystemPosition().toString());
                 case NE:
                     if (systemTile.getNeighbourSystemTiles().containsAll(expectedNeighboursNE)) break;
                     else throw new GalaxyCardinalPositionException();
@@ -156,7 +153,7 @@ public class Galaxy {
                     else throw new GalaxyCardinalPositionException();
                     //if no case is matched, we've gotten an unknown system
                 default:
-                    throw new GalaxyCardinalPositionException("Unknown SystemPosition provided!");
+                    throw new GalaxyCardinalPositionException("FATAL", "Unknown SystemPosition encountered!");
             }
         }
         return true;

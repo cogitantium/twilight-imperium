@@ -2,7 +2,7 @@ package dk.aau.cs.fvejlb17.twilight.systems;
 
 public class SystemTileListBuilder {
 
-    private SystemTileList systemTileList = new SystemTileList();
+    private final SystemTileList systemTileList = new SystemTileList();
 
     public SystemTileListBuilder addSystemTile(SystemTile systemTile) {
         try {
