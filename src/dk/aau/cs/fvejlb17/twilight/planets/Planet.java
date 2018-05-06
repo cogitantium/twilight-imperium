@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Planet {
 
-    private String planetName;
-    private int resourceProduction;
+    private final String planetName;
+    private final int resourceProduction;
 
     public Planet(String planetName, int resourceProduction) {
         this.planetName = planetName;
@@ -16,7 +16,7 @@ public class Planet {
         return planetName;
     }
 
-    public int getResourceProduction() {
+    private int getResourceProduction() {
         return resourceProduction;
     }
 
