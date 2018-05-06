@@ -21,7 +21,7 @@ class PlayerTest {
         Player player02 = new Player("Player01", "Race01", "Red");
         Player player03 = new Player("Player02", "Race01", "Red");
         assertTrue(player01.equals(player02));
-        assertTrue(player01.equals(player01));
+        assertTrue(player02.equals(player03));
         assertFalse(player01.equals(player03));
     }
 
