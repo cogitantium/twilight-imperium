@@ -6,21 +6,9 @@ import dk.aau.cs.fvejlb17.twilight.units.UnitList;
 
 public class SystemTile {
 
-    /*
-    //abstracting postions by enumerating from 0 to 6
-    public enum SystemPosition {
-        C, N, NE, SE, S, SW, NW;
-
-        @Override
-        public String toString() {
-            return "SystemPosition" + this.name();
-        }
-    }
-    */
-
     private final SystemPosition systemPosition;
     private SystemTilePositionList neighbourSystemTiles;
-    private UnitList shipsInSystem;
+    private UnitList shipsInSystem = new UnitList();
     private PlanetList planetsInSystem;
 
     public SystemTile(SystemPosition systemPosition, UnitList shipsInSystem, PlanetList planetsInSystem) {

@@ -5,11 +5,7 @@ public class PlanetListBuilder {
     private final PlanetList planetList = new PlanetList();
 
     public PlanetListBuilder addPlanet(Planet planet) {
-        try {
-            this.planetList.add(planet);
-        } catch (Exception e) {
-            System.out.println("ERROR: " + e.getMessage());
-        }
+        this.planetList.add(planet);
         return this;
     }
 

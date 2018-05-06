@@ -5,11 +5,7 @@ public class SystemTileListBuilder {
     private final SystemTileList systemTileList = new SystemTileList();
 
     public SystemTileListBuilder addSystemTile(SystemTile systemTile) {
-        try {
-            this.systemTileList.add(systemTile);
-        } catch (Exception e) {
-            System.out.println("ERROR: " + e.getMessage());
-        }
+        this.systemTileList.add(systemTile);
         return this;
     }
 
