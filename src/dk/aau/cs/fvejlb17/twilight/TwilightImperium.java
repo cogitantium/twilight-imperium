@@ -8,7 +8,7 @@ public class TwilightImperium {
 
         GalaxyCreator galaxyCreator = new GalaxyCreator();
         Galaxy presetGalaxy = galaxyCreator.createPresetGame();
-        System.out.println("check cardinal congruency " + presetGalaxy.checkCardinalCongruencyOfSystemPositions());
+        System.out.println("check cardinal congruency " + presetGalaxy.checkGalaxyLegality());
 
 
     }

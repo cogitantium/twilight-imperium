@@ -66,35 +66,41 @@ public class Galaxy {
         return false;
     }
 
-    public boolean containsDuplicatePlanets() {
+    private boolean containsDuplicatePlanets() throws GalaxyContainsDuplicatePlanetsException {
         //create hashset with initialCapacity of number of Planets in galaxy
         Set<Integer> planetHashcodes = new HashSet<>(getAllPlanetsInGalaxy().size());
-        //for all Planets add to HashSet and return true, if add-method returns false, implying duplicate
+        //for all Planets add to HashSet and throw exception if add-method returns false, implying duplicate
         for (Planet srcPlanet : this.getAllPlanetsInGalaxy()) {
-            if (!planetHashcodes.add(srcPlanet.hashCode())) return true;
+            if (!planetHashcodes.add(srcPlanet.hashCode()))
+                throw new GalaxyContainsDuplicatePlanetsException(srcPlanet.getPlanetName());
         }
-        return false;
+        return true;
     }
 
     //naïve search for planet by planetName
-    public boolean containsPlanet(String targetPlanetName) {
+    private boolean containsPlanet(String targetPlanetName) throws GalaxyDoesNotContainPlanetException {
+
         //create ArrayList of planetName and add all planetNames in Galaxy
         ArrayList<String> planetNames = new ArrayList<>();
         for (Planet srcPlanet : this.getAllPlanetsInGalaxy()) {
             planetNames.add(srcPlanet.getPlanetName());
         }
-        return planetNames.contains(targetPlanetName);
+        //if galaxy contains targetPlanetName return true, else throw exception
+        if (planetNames.contains(targetPlanetName)) return true;
+        else throw new GalaxyDoesNotContainPlanetException(targetPlanetName);
     }
 
     //for any SystemTiles in Galaxy, return boolean of contains planets and is greater than maxNumOfPlanets
-    public boolean numPlanetsInAnySystemTilesExceeds(int maxNumOfPlanets) {
+    private boolean numPlanetsInAnySystemTilesExceeds(int maxNumOfPlanets) throws GalaxyContainsSystemWithPlanetNumExceedingLimitException {
         for (SystemTile systemTile : this.systemTilesInGalaxy) {
-            if (systemTile.containsPlanets() && systemTile.getNumOfPlanetsInSystemTile() > maxNumOfPlanets) return true;
+            if (systemTile.containsPlanets() && systemTile.getNumOfPlanetsInSystemTile() > maxNumOfPlanets)
+                throw new GalaxyContainsSystemWithPlanetNumExceedingLimitException(maxNumOfPlanets);
         }
         return false;
     }
 
-    public boolean checkCardinalCongruencyOfSystemPositions() {
+    //check if geometry of all systems and their individual neighbourLists are congruent
+    private boolean checkCardinalCongruencyOfSystemPositions() throws GalaxyCardinalPositionException {
         //create expected neighbours as SystemTilePositionList, omitting center system as case is handled independently
         SystemTilePositionList expectedNeighboursN = new SystemTilePositionListBuilder()
                 .addNeighbour(SystemTile.SystemPosition.NW).addNeighbour(SystemTile.SystemPosition.NE)
@@ -125,28 +131,71 @@ public class Galaxy {
                         //if checked SystemPosition is not systemTile itself, do check
                         if (!(systemPosition == SystemTile.SystemPosition.C))
                             //if systemTile does not contain all but itself as neighbours, return false
-                            if (systemTile.getNeighbourSystemTiles().contains(systemPosition)) break; else return false;
+                            if (systemTile.getNeighbourSystemTiles().contains(systemPosition)) break;
+                            else return false;
                     }
 
-                //check if system containsAll with expected neighbours, if true, break and continue, else return false
+                    //check if system containsAll with expected neighbours, if true, break and continue, else return false
                 case N:
-                    if (systemTile.getNeighbourSystemTiles().containsAll(expectedNeighboursN)) break; else return false;
+                    if (systemTile.getNeighbourSystemTiles().containsAll(expectedNeighboursN)) break;
+                    else throw new GalaxyCardinalPositionException();
                 case NE:
-                    if (systemTile.getNeighbourSystemTiles().containsAll(expectedNeighboursNE)) break; else return false;
+                    if (systemTile.getNeighbourSystemTiles().containsAll(expectedNeighboursNE)) break;
+                    else throw new GalaxyCardinalPositionException();
                 case SE:
-                    if (systemTile.getNeighbourSystemTiles().equals(expectedNeighboursSE)) break; else return false;
+                    if (systemTile.getNeighbourSystemTiles().equals(expectedNeighboursSE)) break;
+                    else throw new GalaxyCardinalPositionException();
                 case S:
-                    if (systemTile.getNeighbourSystemTiles().equals(expectedNeighboursS)) break; else return false;
+                    if (systemTile.getNeighbourSystemTiles().equals(expectedNeighboursS)) break;
+                    else throw new GalaxyCardinalPositionException();
                 case SW:
-                    if (systemTile.getNeighbourSystemTiles().equals(expectedNeighboursSW)) break; else return false;
+                    if (systemTile.getNeighbourSystemTiles().equals(expectedNeighboursSW)) break;
+                    else throw new GalaxyCardinalPositionException();
                 case NW:
-                    if (systemTile.getNeighbourSystemTiles().equals(expectedNeighboursNW)) break; else return false;
-                //if no case is matched, we've gotten an unknown system
-                default: return false;
+                    if (systemTile.getNeighbourSystemTiles().equals(expectedNeighboursNW)) break;
+                    else throw new GalaxyCardinalPositionException();
+                    //if no case is matched, we've gotten an unknown system
+                default:
+                    throw new GalaxyCardinalPositionException("Unknown SystemPosition provided!");
             }
         }
         return true;
     }
-    //TODO sort function
 
+    //tie all relevant Galaxy-methods together for legality check of defined properties
+    public boolean checkGalaxyLegality() {
+
+        //assume all properties are false and try/catch each property through method calls
+        boolean containsMecatolRex = false;
+        try {
+            containsMecatolRex = containsPlanet("Mecatol Rex");
+        } catch (GalaxyDoesNotContainPlanetException e) {
+            System.out.println(e.getMessage());
+        }
+        boolean noDuplicatePlanets = false;
+        try {
+            noDuplicatePlanets = containsDuplicatePlanets();
+        } catch (GalaxyContainsDuplicatePlanetsException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //assuming opposite proposition, as method checks whether any system exceeds
+        boolean noSystemExceedsThreePlanets = true;
+        try {
+            noSystemExceedsThreePlanets = numPlanetsInAnySystemTilesExceeds(3);
+        } catch (GalaxyContainsSystemWithPlanetNumExceedingLimitException e) {
+            System.out.println(e.getMessage());
+        }
+
+        boolean congruentCardinalPositions = false;
+        try {
+            congruentCardinalPositions = checkCardinalCongruencyOfSystemPositions();
+        } catch (GalaxyCardinalPositionException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //utilising short-circuiting for returning appropriate boolean to proposition
+        return containsMecatolRex && noDuplicatePlanets && !noSystemExceedsThreePlanets && congruentCardinalPositions;
+    }
+    //TODO sort function
 }
