@@ -48,13 +48,13 @@ public class GalaxyCreator {
         PlanetList northWestPlanets = new PlanetListBuilder().addPlanet(mirage).build();
 
         //create SystemTiles with preset definitions
-        SystemTile centerSystem = new SystemTile(SystemTile.SystemPosition.c, unitList01, centerPlanets);
-        SystemTile northSystem = new SystemTile(SystemTile.SystemPosition.n, unitList02, northPlanets);
-        SystemTile northEastSystem = new SystemTile(SystemTile.SystemPosition.ne);
-        SystemTile southEastSystem = new SystemTile(SystemTile.SystemPosition.se, southEastPlanets);
-        SystemTile southSystem = new SystemTile(SystemTile.SystemPosition.s, southPlanets);
-        SystemTile southWestSystem = new SystemTile(SystemTile.SystemPosition.sw);
-        SystemTile northWestSystem = new SystemTile(SystemTile.SystemPosition.nw, northWestPlanets);
+        SystemTile centerSystem = new SystemTile(SystemTile.SystemPosition.C, unitList01, centerPlanets);
+        SystemTile northSystem = new SystemTile(SystemTile.SystemPosition.N, unitList02, northPlanets);
+        SystemTile northEastSystem = new SystemTile(SystemTile.SystemPosition.NE);
+        SystemTile southEastSystem = new SystemTile(SystemTile.SystemPosition.SE, southEastPlanets);
+        SystemTile southSystem = new SystemTile(SystemTile.SystemPosition.S, southPlanets);
+        SystemTile southWestSystem = new SystemTile(SystemTile.SystemPosition.SW);
+        SystemTile northWestSystem = new SystemTile(SystemTile.SystemPosition.NW, northWestPlanets);
 
         //create SystemTileList with builder and add all SystemTiles
         SystemTileList systemTileList = new SystemTileListBuilder().addSystemTile(centerSystem).addSystemTile(northSystem)
