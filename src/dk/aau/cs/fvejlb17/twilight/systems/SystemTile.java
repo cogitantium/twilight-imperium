@@ -11,9 +11,9 @@ import java.util.ArrayList;
 public class SystemTile {
 
     private final SystemPosition systemPosition;
-    private SystemPositionList neighbourSystemTiles;
+    private SystemPositionList neighbourSystemTiles = new SystemPositionList();
     private UnitList shipsInSystem = new UnitList();
-    private PlanetList planetsInSystem;
+    private PlanetList planetsInSystem = new PlanetList();
 
     public SystemTile(SystemPosition systemPosition, UnitList shipsInSystem, PlanetList planetsInSystem) {
         this.systemPosition = systemPosition;
