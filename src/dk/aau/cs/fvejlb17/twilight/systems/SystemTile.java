@@ -15,6 +15,10 @@ public class SystemTile {
         this.systemPosition = systemPosition;
         calculateAndSetNeighbourPositions();
         this.shipsInSystem = shipsInSystem;
+        //for all shipsInSystem, set their SystemPosition to systemPosition
+        for (Ships ship : this.shipsInSystem) {
+            ship.setSystemPosition(systemPosition);
+        }
         this.planetsInSystem = planetsInSystem;
     }
 
