@@ -25,7 +25,7 @@ public class Galaxy {
     }
 
     //for all SystemTiles add all Ships to allShipsInGalaxy
-    public UnitList getAllShipsInGalaxy() {
+    private UnitList getAllShipsInGalaxy() {
         UnitList allShipsInGalaxy = new UnitList();
         for (SystemTile systemTile : systemTilesInGalaxy) {
             allShipsInGalaxy.addAll(systemTile.getAllShipsInSystemTile());
@@ -197,20 +197,15 @@ public class Galaxy {
         return containsMecatolRex && noDuplicatePlanets && !noSystemExceedsThreePlanets && congruentCardinalPositions;
     }
 
-    private UnitList getAllShipsInGalaxyByOwner(Player player) {
+    //add all ships owned by player to temp UnitList and sorts with UnitSort
+    public UnitList getAllShipsInGalaxyByOwnerSorted(Player player) {
         UnitList unitList = new UnitList();
+        //add all ships in galaxy owned by player to temp UnitList
         for (Ships ship : this.getAllShipsInGalaxy()) {
             if (ship.getOwner().equals(player)) unitList.add(ship);
         }
+        //call sort with comparator UnitSort and return list
+        unitList.sort(new UnitSort());
         return unitList;
     }
-
-    public UnitList getAllShipsInGalaxyByOwnerSorted(Player player) {
-        return UnitSort.SortUnitList(getAllShipsInGalaxyByOwner(player));
-    }
-
-
-
-
-    //TODO sort function
 }
