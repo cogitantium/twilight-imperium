@@ -2,9 +2,11 @@ package dk.aau.cs.fvejlb17.twilight.galaxies;
 
 import dk.aau.cs.fvejlb17.twilight.planets.Planet;
 import dk.aau.cs.fvejlb17.twilight.planets.PlanetList;
+import dk.aau.cs.fvejlb17.twilight.players.Player;
 import dk.aau.cs.fvejlb17.twilight.systems.*;
 import dk.aau.cs.fvejlb17.twilight.units.Ships;
 import dk.aau.cs.fvejlb17.twilight.units.UnitList;
+import dk.aau.cs.fvejlb17.twilight.units.UnitSort;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,12 +20,12 @@ public class Galaxy {
         this.systemTilesInGalaxy = systemTilesInGalaxy;
     }
 
-    private SystemTileList getAllSystemsInGalaxy() {
+    public SystemTileList getAllSystemsInGalaxy() {
         return systemTilesInGalaxy;
     }
 
     //for all SystemTiles add all Ships to allShipsInGalaxy
-    public UnitList getAllShipsInGalaxy() {
+    private UnitList getAllShipsInGalaxy() {
         UnitList allShipsInGalaxy = new UnitList();
         for (SystemTile systemTile : systemTilesInGalaxy) {
             allShipsInGalaxy.addAll(systemTile.getAllShipsInSystemTile());
@@ -51,14 +53,6 @@ public class Galaxy {
     public boolean galaxyContainsShips(Ships ship) {
         for (SystemTile systemTile : this.getAllSystemsInGalaxy()) {
             if (systemTile.getAllShipsInSystemTile().contains(ship)) return true;
-        }
-        return false;
-    }
-
-    //search galaxy for planet, if contains, by equals method, return true
-    public boolean galaxyContainsPlanet(Planet planet) {
-        for (Planet srcPlanet : this.getAllPlanetsInGalaxy()) {
-            if (srcPlanet.equals(planet)) return true;
         }
         return false;
     }
@@ -98,23 +92,23 @@ public class Galaxy {
 
     //check if geometry of all systems and their individual neighbourLists are congruent
     private boolean checkCardinalCongruencyOfSystemPositions() throws GalaxyCardinalPositionException {
-        //create expected neighbours as SystemTilePositionList, omitting center system as case is handled independently
-        SystemTilePositionList expectedNeighboursN = new SystemTilePositionListBuilder()
+        //create expected neighbours as SystemPositionList, omitting center system as case is handled independently
+        SystemPositionList expectedNeighboursN = new SystemPositionListBuilder()
                 .addNeighbour(SystemPosition.NW).addNeighbour(SystemPosition.NE)
                 .addNeighbour(SystemPosition.C).build();
-        SystemTilePositionList expectedNeighboursNE = new SystemTilePositionListBuilder()
+        SystemPositionList expectedNeighboursNE = new SystemPositionListBuilder()
                 .addNeighbour(SystemPosition.N).addNeighbour(SystemPosition.SE)
                 .addNeighbour(SystemPosition.C).build();
-        SystemTilePositionList expectedNeighboursSE = new SystemTilePositionListBuilder()
+        SystemPositionList expectedNeighboursSE = new SystemPositionListBuilder()
                 .addNeighbour(SystemPosition.NE).addNeighbour(SystemPosition.S)
                 .addNeighbour(SystemPosition.C).build();
-        SystemTilePositionList expectedNeighboursS = new SystemTilePositionListBuilder()
+        SystemPositionList expectedNeighboursS = new SystemPositionListBuilder()
                 .addNeighbour(SystemPosition.SE).addNeighbour(SystemPosition.SW)
                 .addNeighbour(SystemPosition.C).build();
-        SystemTilePositionList expectedNeighboursSW = new SystemTilePositionListBuilder()
+        SystemPositionList expectedNeighboursSW = new SystemPositionListBuilder()
                 .addNeighbour(SystemPosition.S).addNeighbour(SystemPosition.NW)
                 .addNeighbour(SystemPosition.C).build();
-        SystemTilePositionList expectedNeighboursNW = new SystemTilePositionListBuilder()
+        SystemPositionList expectedNeighboursNW = new SystemPositionListBuilder()
                 .addNeighbour(SystemPosition.SW).addNeighbour(SystemPosition.N)
                 .addNeighbour(SystemPosition.C).build();
 
@@ -132,7 +126,7 @@ public class Galaxy {
                             else return false;
                     }
 
-                    //check if system containsAll with expected neighbours, if true, break and continue, else return false
+                //check if system containsAll with expected neighbours, if true, break and continue, else return false
                 case N:
                     if (systemTile.getNeighbourSystemTiles().containsAll(expectedNeighboursN)) break;
                     else throw new GalaxyCardinalPositionException(systemTile.getSystemPosition().toString());
@@ -151,7 +145,7 @@ public class Galaxy {
                 case NW:
                     if (systemTile.getNeighbourSystemTiles().equals(expectedNeighboursNW)) break;
                     else throw new GalaxyCardinalPositionException();
-                    //if no case is matched, we've gotten an unknown system
+                //if no case is matched, we've gotten an unknown system
                 default:
                     throw new GalaxyCardinalPositionException("FATAL", "Unknown SystemPosition encountered!");
             }
@@ -194,5 +188,16 @@ public class Galaxy {
         //utilising short-circuiting for returning appropriate boolean to proposition
         return containsMecatolRex && noDuplicatePlanets && !noSystemExceedsThreePlanets && congruentCardinalPositions;
     }
-    //TODO sort function
+
+    //add all ships owned by player to temp UnitList and sorts with UnitSort
+    public UnitList getAllShipsInGalaxyByOwnerSorted(Player player) {
+        UnitList unitList = new UnitList();
+        //add all ships in galaxy owned by player to temp UnitList
+        for (Ships ship : this.getAllShipsInGalaxy()) {
+            if (ship.getOwner().equals(player)) unitList.add(ship);
+        }
+        //call sort with comparator UnitSort and return list
+        unitList.sort(new UnitSort());
+        return unitList;
+    }
 }
