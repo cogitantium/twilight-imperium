@@ -20,7 +20,7 @@ public class Galaxy {
         this.systemTilesInGalaxy = systemTilesInGalaxy;
     }
 
-    private SystemTileList getAllSystemsInGalaxy() {
+    public SystemTileList getAllSystemsInGalaxy() {
         return systemTilesInGalaxy;
     }
 
@@ -53,14 +53,6 @@ public class Galaxy {
     public boolean galaxyContainsShips(Ships ship) {
         for (SystemTile systemTile : this.getAllSystemsInGalaxy()) {
             if (systemTile.getAllShipsInSystemTile().contains(ship)) return true;
-        }
-        return false;
-    }
-
-    //search galaxy for planet, if contains, by equals method, return true
-    public boolean galaxyContainsPlanet(Planet planet) {
-        for (Planet srcPlanet : this.getAllPlanetsInGalaxy()) {
-            if (srcPlanet.equals(planet)) return true;
         }
         return false;
     }
