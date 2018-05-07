@@ -19,7 +19,7 @@ public class GalaxyCreator {
         //create players and PlayerList from preset definitions
         Player playerCrassus = new Player("Crassus", "The Emirates of Hacan", "Blue");
         Player playerPompey = new Player("Pompey", "Federation of Sol", "Red");
-        PlayerList playerList = new PlayerListBuilder().addPlayer(playerCrassus).addPlayer(playerCrassus).build();
+        PlayerList playerList = new PlayerListBuilder().addPlayer(playerCrassus).addPlayer(playerPompey).build();
 
         //create playerCrassus' ships and add to UnitList
         Dreadnought dreadnought01 = new Dreadnought(playerCrassus);
