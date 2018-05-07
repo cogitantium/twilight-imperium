@@ -23,6 +23,10 @@ public class Galaxy {
         this.playersInGalaxy = playersInGalaxy;
     }
 
+    public PlayerList getPlayersInGalaxy() {
+        return this.playersInGalaxy;
+    }
+
     public SystemTileList getAllSystemsInGalaxy() {
         return systemTilesInGalaxy;
     }
@@ -202,5 +206,13 @@ public class Galaxy {
         //call sort with comparator UnitSort and return list
         unitList.sort(new UnitSort());
         return unitList;
+    }
+
+    @Override
+    public String toString() {
+        return "Galaxy{" +
+                "systemTilesInGalaxy=" + systemTilesInGalaxy.size() +
+                ", playersInGalaxy=" + playersInGalaxy.size() +
+                '}';
     }
 }
