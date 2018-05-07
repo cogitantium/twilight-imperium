@@ -1,11 +1,15 @@
 package dk.aau.cs.fvejlb17.twilight.planets;
 
+import dk.aau.cs.fvejlb17.twilight.players.Player;
+
 import java.util.Objects;
 
 public class Planet {
 
     private final String planetName;
     private final int resourceProduction;
+    //controlling player initialised to null - given more time, this would be avoided
+    private Player controllingPlayer = null;
 
     public Planet(String planetName, int resourceProduction) {
         this.planetName = planetName;
@@ -32,5 +36,13 @@ public class Planet {
     @Override
     public int hashCode() {
         return Objects.hash(getPlanetName(), getResourceProduction());
+    }
+
+    public Player getControllingPlayer() {
+        return controllingPlayer;
+    }
+
+    public void setControllingPlayer(Player controllingPlayer) {
+        this.controllingPlayer = controllingPlayer;
     }
 }
