@@ -15,6 +15,18 @@ public class Player {
         this.colour = colour;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getRace() {
+        return race;
+    }
+
+    public String getColour() {
+        return colour;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

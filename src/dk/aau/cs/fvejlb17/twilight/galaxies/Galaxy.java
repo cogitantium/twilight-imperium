@@ -3,6 +3,7 @@ package dk.aau.cs.fvejlb17.twilight.galaxies;
 import dk.aau.cs.fvejlb17.twilight.planets.Planet;
 import dk.aau.cs.fvejlb17.twilight.planets.PlanetList;
 import dk.aau.cs.fvejlb17.twilight.players.Player;
+import dk.aau.cs.fvejlb17.twilight.players.PlayerList;
 import dk.aau.cs.fvejlb17.twilight.systems.*;
 import dk.aau.cs.fvejlb17.twilight.units.Ships;
 import dk.aau.cs.fvejlb17.twilight.units.UnitList;
@@ -15,9 +16,15 @@ import java.util.Set;
 public class Galaxy {
 
     private final SystemTileList systemTilesInGalaxy;
+    private final PlayerList playersInGalaxy;
 
-    Galaxy(SystemTileList systemTilesInGalaxy) {
+    Galaxy(SystemTileList systemTilesInGalaxy, PlayerList playersInGalaxy) {
         this.systemTilesInGalaxy = systemTilesInGalaxy;
+        this.playersInGalaxy = playersInGalaxy;
+    }
+
+    public PlayerList getPlayersInGalaxy() {
+        return this.playersInGalaxy;
     }
 
     public SystemTileList getAllSystemsInGalaxy() {
@@ -199,5 +206,13 @@ public class Galaxy {
         //call sort with comparator UnitSort and return list
         unitList.sort(new UnitSort());
         return unitList;
+    }
+
+    @Override
+    public String toString() {
+        return "Galaxy{" +
+                "systemTilesInGalaxy=" + systemTilesInGalaxy.size() +
+                ", playersInGalaxy=" + playersInGalaxy.size() +
+                '}';
     }
 }

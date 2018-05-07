@@ -4,6 +4,8 @@ import dk.aau.cs.fvejlb17.twilight.planets.Planet;
 import dk.aau.cs.fvejlb17.twilight.planets.PlanetList;
 import dk.aau.cs.fvejlb17.twilight.planets.PlanetListBuilder;
 import dk.aau.cs.fvejlb17.twilight.players.Player;
+import dk.aau.cs.fvejlb17.twilight.players.PlayerList;
+import dk.aau.cs.fvejlb17.twilight.players.PlayerListBuilder;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemPosition;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemTile;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemTileList;
@@ -14,9 +16,10 @@ public class GalaxyCreator {
 
     public Galaxy createPresetGame() {
 
-        //create players from preset definitions
+        //create players and PlayerList from preset definitions
         Player playerCrassus = new Player("Crassus", "The Emirates of Hacan", "Blue");
         Player playerPompey = new Player("Pompey", "Federation of Sol", "Red");
+        PlayerList playerList = new PlayerListBuilder().addPlayer(playerCrassus).addPlayer(playerPompey).build();
 
         //create playerCrassus' ships and add to UnitList
         Dreadnought dreadnought01 = new Dreadnought(playerCrassus);
@@ -62,6 +65,6 @@ public class GalaxyCreator {
                 .addSystemTile(northEastSystem).addSystemTile(southEastSystem).addSystemTile(southSystem)
                 .addSystemTile(southWestSystem).addSystemTile(northWestSystem).build();
 
-        return new Galaxy(systemTileList);
+        return new Galaxy(systemTileList, playerList);
     }
 }

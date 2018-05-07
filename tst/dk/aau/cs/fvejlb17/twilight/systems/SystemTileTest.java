@@ -1,5 +1,8 @@
 package dk.aau.cs.fvejlb17.twilight.systems;
 
+import dk.aau.cs.fvejlb17.twilight.galaxies.Galaxy;
+import dk.aau.cs.fvejlb17.twilight.galaxies.GalaxyCreator;
+import dk.aau.cs.fvejlb17.twilight.planets.Planet;
 import dk.aau.cs.fvejlb17.twilight.players.Player;
 import dk.aau.cs.fvejlb17.twilight.units.Cruiser;
 import dk.aau.cs.fvejlb17.twilight.units.UnitList;
@@ -68,5 +71,33 @@ class SystemTileTest {
 
     @Test
     void containsPlanets() {
+    }
+
+    @Test
+    void calculatePlanetaryControl() {
+        //create sensible preset game and assert legality
+        Galaxy presetGalaxy = new GalaxyCreator().createPresetGame();
+        Player playerCrassus = new Player("Crassus", "The Emirates of Hacan", "Blue");
+        Player playerPompey = new Player("Pompey", "Federation of Sol", "Red");
+        assertTrue(presetGalaxy.checkGalaxyLegality());
+
+        SystemTileList systemTileList = presetGalaxy.getAllSystemsInGalaxy();
+
+        //for all systems in preset game
+        for (SystemTile systemTile : systemTileList) {
+            //for all planets in SystemTileList
+            for (Planet planet : systemTile.getAllPlanetsInSystemTile()) {
+                //if SystemTile is located in C, controlling player is expected to be Crassus
+                if (systemTile.getSystemPosition() == SystemPosition.C) {
+                    assertTrue(planet.getControllingPlayer().equals(playerCrassus));
+                    //if SystemTile is located in N, controlling player is expected to be Pompey
+                } else if (systemTile.getSystemPosition() == SystemPosition.N) {
+                    assertTrue(planet.getControllingPlayer().equals(playerPompey));
+                    //if SystemTile is not located in C or N, controlling player is expected to be null
+                } else {
+                    assertTrue(planet.getControllingPlayer() == null);
+                }
+            }
+        }
     }
 }
