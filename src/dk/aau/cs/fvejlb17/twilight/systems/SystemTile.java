@@ -109,11 +109,21 @@ public class SystemTile {
     }
 
     public boolean shipEnterSystemTile(Ships ship) {
-        return this.shipsInSystem.add(ship);
+        if (this.shipsInSystem.add(ship)) {
+            //since ships has modified in SystemTile, planetary control is subject to change and must be recalculated
+            this.calculatePlanetaryControl();
+            return true;
+        }
+        return false;
     }
 
     public boolean shipLeaveSystemTile(Ships ship) {
-        return this.shipsInSystem.remove(ship);
+        if (this.shipsInSystem.remove(ship)) {
+            //since ships has modified in SystemTile, planetary control is subject to change and must be recalculated
+            this.calculatePlanetaryControl();
+            return true;
+        }
+        return false;
     }
 
     public UnitList getAllShipsInSystemTile() {
