@@ -48,7 +48,7 @@ public class GalaxyCreator {
         PlanetList southWestPlanets = new PlanetListBuilder().build();
         PlanetList northWestPlanets = new PlanetListBuilder().addPlanet(mirage).build();
 
-        //create SystemTiles with preset definitions
+        //create SystemTiles with preset definitions and containing ships
         SystemTile centerSystem = new SystemTile(SystemPosition.C, unitList01, centerPlanets);
         SystemTile northSystem = new SystemTile(SystemPosition.N, unitList02, northPlanets);
         SystemTile northEastSystem = new SystemTile(SystemPosition.NE);
