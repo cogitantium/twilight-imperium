@@ -5,20 +5,14 @@ import dk.aau.cs.fvejlb17.twilight.galaxies.GalaxyCreator;
 import dk.aau.cs.fvejlb17.twilight.planets.Planet;
 import dk.aau.cs.fvejlb17.twilight.players.Player;
 import dk.aau.cs.fvejlb17.twilight.units.Cruiser;
+import dk.aau.cs.fvejlb17.twilight.units.Dreadnought;
 import dk.aau.cs.fvejlb17.twilight.units.UnitList;
+import dk.aau.cs.fvejlb17.twilight.units.UnitListBuilder;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SystemTileTest {
-
-    @Test
-    void getSystemPosition() {
-    }
-
-    @Test
-    void getNeighbourSystemTiles() {
-    }
 
     @Test
     void shipEnterSystemTile() {
@@ -62,14 +56,6 @@ class SystemTileTest {
     }
 
     @Test
-    void getAllPlanetsInSystemTile() {
-    }
-
-    @Test
-    void getNumOfPlanetsInSystemTile() {
-    }
-
-    @Test
     void containsPlanets() {
     }
 
@@ -87,17 +73,64 @@ class SystemTileTest {
         for (SystemTile systemTile : systemTileList) {
             //for all planets in SystemTileList
             for (Planet planet : systemTile.getAllPlanetsInSystemTile()) {
+                switch (systemTile.getSystemPosition()) {
                 //if SystemTile is located in C, controlling player is expected to be Crassus
-                if (systemTile.getSystemPosition() == SystemPosition.C) {
-                    assertTrue(planet.getControllingPlayer().equals(playerCrassus));
-                    //if SystemTile is located in N, controlling player is expected to be Pompey
-                } else if (systemTile.getSystemPosition() == SystemPosition.N) {
-                    assertTrue(planet.getControllingPlayer().equals(playerPompey));
-                    //if SystemTile is not located in C or N, controlling player is expected to be null
-                } else {
-                    assertTrue(planet.getControllingPlayer() == null);
+                    case C:
+                        assertTrue(planet.getControllingPlayer().equals(playerCrassus));
+                        break;
+                        //if SystemTile is located in N, controlling player is expected to be Pompey
+                    case N:
+                        assertTrue(planet.getControllingPlayer().equals(playerPompey));
+                        break;
+                        //if SystemTile is not located in C or N, controlling player is expected to be null
+                    default:
+                        assertTrue(planet.getControllingPlayer() == null);
+                        break;
                 }
             }
         }
+    }
+
+    @Test
+    void resolveUnfairSpaceBattle1() {
+        Player playerOne = new Player("playerNameOne", "playerRace", "playerColour");
+        Player playerTwo = new Player("playerNameTwo", "playerRace", "playerColour");
+
+        Dreadnought dreadnought01 = new Dreadnought(playerOne);
+        Dreadnought dreadnought02 = new Dreadnought(playerOne);
+        Dreadnought dreadnought03 = new Dreadnought(playerOne);
+        Dreadnought dreadnought04 = new Dreadnought(playerOne);
+        Dreadnought dreadnought05 = new Dreadnought(playerOne);
+        Dreadnought dreadnought06 = new Dreadnought(playerOne);
+        Dreadnought dreadnought07 = new Dreadnought(playerOne);
+        Dreadnought dreadnought08 = new Dreadnought(playerTwo);
+        UnitList unitList = new UnitListBuilder().addUnit(dreadnought01).addUnit(dreadnought02)
+                .addUnit(dreadnought03).addUnit(dreadnought04).addUnit(dreadnought05)
+                .addUnit(dreadnought06).addUnit(dreadnought07).addUnit(dreadnought08).build();
+
+        SystemTile systemTile = new SystemTile(unitList);
+
+        //as playerTwo by first round has a chance to win: (6/10 * 1) / (6/10 * 7),
+        // it's very unlikely that playerTwo would win, assert true that playerOne wins
+        assertEquals(playerOne, systemTile.resolveSpaceBattle(playerOne, playerTwo));
+
+        //if playerTwo lost, no ships owned by playerTwo should exist in system
+        assertTrue(systemTile.getAllShipsInSystemOwnedBy(playerTwo).isEmpty());
+    }
+
+    @Test
+    void resolveUnfairSpaceBattle2() {
+        Player playerOne = new Player("playerNameOne", "playerRace", "playerColour");
+        Player playerTwo = new Player("playerNameTwo", "playerRace", "playerColour");
+
+        Dreadnought dreadnought01 = new Dreadnought(playerOne);
+        Dreadnought dreadnought02 = new Dreadnought(playerOne);
+
+        UnitList unitList = new UnitListBuilder().addUnit(dreadnought01).addUnit(dreadnought02).build();
+
+        SystemTile systemTile = new SystemTile(unitList);
+
+        //since only playerOne has ships in system, victorious player should be null
+        assertNull(systemTile.resolveSpaceBattle(playerOne, playerTwo));
     }
 }
