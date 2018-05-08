@@ -44,4 +44,36 @@ class WriteGameStateToFileTest {
 
 
     }
+
+    @Test
+    void createPlanetaryControlFileTestNoPlayers() {
+
+        //create prerequisite, presetGalaxy, path to be tested and path to expected file
+        Galaxy galaxy = new GalaxyCreator().createPresetGame();
+        Path planetaryControlFile = Paths.get(OUTPUTDIR + "/" + PLANETARYCONTROLFILE);
+        Path expectedPlanetaryControlFile = Paths.get(
+                "tst/dk/aau/cs/fvejlb17/twilight/utilities/expectedPlanetaryControlFileNoPlayers.txt");
+
+        //remove all players from galaxy and assert that they've been removed
+        galaxy.getPlayersInGalaxy().clear();
+        assertTrue(galaxy.getPlayersInGalaxy().isEmpty());
+
+        try {
+            //read all lines of expected output into bytearray
+            byte[] expectedOutput = Files.readAllBytes(expectedPlanetaryControlFile);
+
+            //try running method to be tested
+            WriteGameStateToFile.createPlanetaryControlFile(galaxy);
+
+            //read all lines of actual output into bytearray
+            byte[] actualOutput = Files.readAllBytes(planetaryControlFile);
+
+            //assert that bytearrays are equal
+            assertTrue(Arrays.equals(expectedOutput, actualOutput));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }

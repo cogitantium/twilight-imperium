@@ -39,7 +39,7 @@ public class WriteGameStateToFile {
         // returns after printing warning message
         if (galaxy.getPlayersInGalaxy().isEmpty()) {
             byte[] errorMessage =
-                    "WARNING: Galaxy does not contain any players, any output is irrelevant!".getBytes("UTF-8");
+                    "WARNING: Galaxy does not contain any players, any output is irrelevant!\n".getBytes("UTF-8");
             Files.write(planetaryControlFile, errorMessage, StandardOpenOption.APPEND);
             return;
         }
