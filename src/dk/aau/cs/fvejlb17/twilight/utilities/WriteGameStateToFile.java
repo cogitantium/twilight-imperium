@@ -22,7 +22,6 @@ public class WriteGameStateToFile {
     }
 
     public static void createPlanetaryControlFile(Galaxy galaxy) throws IOException {
-        //TODO should be tested, at least naïvely
         //create output directory if it doesn't exist
         if (!Files.exists(Paths.get(OUTPUTDIR))) Files.createDirectory(Paths.get(OUTPUTDIR));
 
