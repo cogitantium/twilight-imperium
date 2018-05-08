@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-public class WriteGameStateToFile {
+class WriteGameStateToFile {
 
     public static void createPlanetaryControlFile(Galaxy galaxy) throws IOException {
         //create constants for use in writing file
