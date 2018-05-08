@@ -20,7 +20,4 @@ class PlanetListBuilderTest {
         assertEquals(planetList01.get(0), planetList02.get(0));
     }
 
-    @Test
-    void build() {
-    }
 }

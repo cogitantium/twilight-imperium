@@ -7,10 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlanetTest {
 
     @Test
-    void getPlanetName() {
-    }
-
-    @Test
     void equalsTest() {
         Planet planet01 = new Planet("planetName", 6);
         Planet planet02 = new Planet("planetName", 6);
