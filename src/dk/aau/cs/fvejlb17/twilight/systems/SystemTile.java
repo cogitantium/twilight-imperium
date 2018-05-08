@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class SystemTile {
 
-    private final SystemPosition systemPosition;
+    private SystemPosition systemPosition;
     private SystemPositionList neighbourSystemTiles = new SystemPositionList();
     private UnitList shipsInSystem = new UnitList();
     private PlanetList planetsInSystem = new PlanetList();
@@ -34,13 +34,27 @@ public class SystemTile {
         this.planetsInSystem = planetsInSystem;
     }
 
+    public SystemTile(UnitList unitList, PlanetList planetsInSystem) {
+        this.shipsInSystem = unitList;
+        this.planetsInSystem = planetsInSystem;
+    }
+
     public SystemTile(SystemPosition systemPosition) {
         this.systemPosition = systemPosition;
         calculateAndSetNeighbourPositions();
     }
 
+    public SystemTile(PlanetList planetsInSystem) {
+        this.planetsInSystem = planetsInSystem;
+    }
+
     public SystemPosition getSystemPosition() {
         return this.systemPosition;
+    }
+
+    public void setSystemPosition(SystemPosition systemPosition) {
+        this.systemPosition = systemPosition;
+        calculateAndSetNeighbourPositions();
     }
 
     public SystemPositionList getNeighbourSystemTiles() {
