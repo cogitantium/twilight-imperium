@@ -23,6 +23,12 @@ class GalaxyCreatorTest {
 
         SystemTileList systemTileList = galaxy.getAllSystemsInGalaxy();
 
+        //assert that seven planets exist in galaxy
+        assertTrue(systemTileList.getNumOfPlanetsInSystemTileList() == 7);
+
+        //assert that six ships exist in galaxy
+        assertTrue(galaxy.getAllShipsInGalaxy().size() == 6);
+
         //assert that center systemtile contains planets
         assertTrue(systemTileList.get(0).containsPlanets());
 

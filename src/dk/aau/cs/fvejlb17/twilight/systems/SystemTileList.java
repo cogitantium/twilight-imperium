@@ -20,4 +20,8 @@ public class SystemTileList extends ArrayList<SystemTile> {
         } else return sourceSystemTile.getNeighbourSystemTiles().contains(destSystemTile.getSystemPosition())
                 && ship.getMovementSpeed() == 1 && destSystemTile.shipEnterSystemTile(ship) && sourceSystemTile.shipLeaveSystemTile(ship);
     }
+
+    public int getNumOfPlanetsInSystemTileList() {
+        return this.size();
+    }
 }
