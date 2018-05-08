@@ -6,8 +6,8 @@ import dk.aau.cs.fvejlb17.twilight.players.Player;
 import dk.aau.cs.fvejlb17.twilight.players.PlayerList;
 import dk.aau.cs.fvejlb17.twilight.systems.*;
 import dk.aau.cs.fvejlb17.twilight.units.Ships;
-import dk.aau.cs.fvejlb17.twilight.units.UnitList;
 import dk.aau.cs.fvejlb17.twilight.units.UnitCombatResourceComparator;
+import dk.aau.cs.fvejlb17.twilight.units.UnitList;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -125,7 +125,7 @@ public class Galaxy {
                             else return false;
                     }
 
-                //check if system containsAll with expected neighbours, if true, break and continue, else return false
+                    //check if system containsAll with expected neighbours, if true, break and continue, else return false
                 case N:
                     if (systemTile.getNeighbourSystemTiles().containsAll(expectedNeighboursN)) break;
                     else throw new GalaxyCardinalPositionException(systemTile.getSystemPosition().toString());
@@ -144,7 +144,7 @@ public class Galaxy {
                 case NW:
                     if (systemTile.getNeighbourSystemTiles().equals(expectedNeighboursNW)) break;
                     else throw new GalaxyCardinalPositionException();
-                //if no case is matched, we've gotten an unknown system
+                    //if no case is matched, we've gotten an unknown system
                 default:
                     throw new GalaxyCardinalPositionException("FATAL", "Unknown SystemPosition encountered!");
             }

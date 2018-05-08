@@ -1,6 +1,7 @@
 package dk.aau.cs.fvejlb17.twilight;
 
-import dk.aau.cs.fvejlb17.twilight.galaxies.*;
+import dk.aau.cs.fvejlb17.twilight.galaxies.Galaxy;
+import dk.aau.cs.fvejlb17.twilight.galaxies.GalaxyCreator;
 
 class TwilightImperium {
 

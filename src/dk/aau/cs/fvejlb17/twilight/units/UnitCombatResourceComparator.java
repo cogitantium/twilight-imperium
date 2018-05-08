@@ -10,7 +10,7 @@ public class UnitCombatResourceComparator implements Comparator<Ships> {
 
         //if ship1 is greater than ship2 in combatValue, return positive
         if (ship1.getCombatValue() > ship2.getCombatValue()) return 1;
-        //if ship2 is greater than ship1 in combatValue, return negative
+            //if ship2 is greater than ship1 in combatValue, return negative
         else if (ship1.getCombatValue() < ship2.getCombatValue()) return -1;
 
         //if both ships combatValue and resourceCost is equal, return 0 implying no further sorting

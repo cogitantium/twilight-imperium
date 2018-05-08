@@ -4,7 +4,10 @@ import dk.aau.cs.fvejlb17.twilight.planets.Planet;
 import dk.aau.cs.fvejlb17.twilight.planets.PlanetList;
 import dk.aau.cs.fvejlb17.twilight.players.Player;
 import dk.aau.cs.fvejlb17.twilight.players.PlayerList;
-import dk.aau.cs.fvejlb17.twilight.units.*;
+import dk.aau.cs.fvejlb17.twilight.units.Ships;
+import dk.aau.cs.fvejlb17.twilight.units.UnitList;
+import dk.aau.cs.fvejlb17.twilight.units.UnitListBuilder;
+import dk.aau.cs.fvejlb17.twilight.units.UnitResourceComparator;
 
 import java.util.ArrayList;
 
