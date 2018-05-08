@@ -1,4 +1,4 @@
-package dk.aau.cs.fvejlb17.twilight.galaxies.randomnames;
+package dk.aau.cs.fvejlb17.twilight.utilities;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -8,10 +8,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NameFileReader {
+public class FileReader {
 
     public static List<String> getLinesFromFile(String type) {
 
+        //TODO should return empty array if type is not recognised
         //declaring constants of filenames of sample strings and source directory
         String file = "";
         final String directory = "gameData/randomNames/";
@@ -19,16 +20,16 @@ public class NameFileReader {
 
         //switch for type of sample strings wanted by method parameter
         switch (type) {
-            case "planet":
+            case "planets":
                 file = "planetNames.txt";
                 break;
-            case "player":
+            case "names":
                 file = "playerNames.txt";
                 break;
             case "races":
                 file = "playerRaces.txt";
                 break;
-            case "colour":
+            case "colours":
                 file = "playerColours.txt";
                 break;
         }
