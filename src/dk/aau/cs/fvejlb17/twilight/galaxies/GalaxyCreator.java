@@ -50,10 +50,8 @@ public class GalaxyCreator {
         //create PlanetLists with preset definitions
         PlanetList centerPlanets = new PlanetListBuilder().addPlanet(mecatolRex).build();
         PlanetList northPlanets = new PlanetListBuilder().addPlanet(vegaMinor).addPlanet(vegaMajor).build();
-        PlanetList northEastPlanets = new PlanetListBuilder().build();
         PlanetList southEastPlanets = new PlanetListBuilder().addPlanet(industrex).build();
         PlanetList southPlanets = new PlanetListBuilder().addPlanet(rigelOne).addPlanet(rigelTwo).build();
-        PlanetList southWestPlanets = new PlanetListBuilder().build();
         PlanetList northWestPlanets = new PlanetListBuilder().addPlanet(mirage).build();
 
         //create SystemTiles with preset definitions and containing ships
@@ -74,8 +72,6 @@ public class GalaxyCreator {
     }
 
     public Galaxy createRandomGame(int maxNumShipsPerPlayer) {
-
-
 
         //creating random numPlayers above 2, for sensible game and below 6 for sufficient names to name players
         int numPlayers = Maths.randomBetween(2, 6);
@@ -148,7 +144,7 @@ public class GalaxyCreator {
             }
         }
 
-        //create SystemTileList to collect all systemtiles created below
+        //create SystemTileList to collect all SystemTiles created below
         SystemTileList systemTileList = new SystemTileList();
 
 

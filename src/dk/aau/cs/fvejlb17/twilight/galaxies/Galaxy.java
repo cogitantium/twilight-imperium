@@ -7,7 +7,7 @@ import dk.aau.cs.fvejlb17.twilight.players.PlayerList;
 import dk.aau.cs.fvejlb17.twilight.systems.*;
 import dk.aau.cs.fvejlb17.twilight.units.Ships;
 import dk.aau.cs.fvejlb17.twilight.units.UnitList;
-import dk.aau.cs.fvejlb17.twilight.units.UnitSort;
+import dk.aau.cs.fvejlb17.twilight.units.UnitCombatResourceComparator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -54,14 +54,6 @@ public class Galaxy {
             }
         }
         return allPlanetsInGalaxy;
-    }
-
-    //search galaxy for ship, if at least one equals, return true
-    public boolean galaxyContainsShips(Ships ship) {
-        for (SystemTile systemTile : this.getAllSystemsInGalaxy()) {
-            if (systemTile.getAllShipsInSystemTile().contains(ship)) return true;
-        }
-        return false;
     }
 
     private boolean containsDuplicatePlanets() throws GalaxyContainsDuplicatePlanetsException {
@@ -196,15 +188,15 @@ public class Galaxy {
         return containsMecatolRex && noDuplicatePlanets && !noSystemExceedsThreePlanets && congruentCardinalPositions;
     }
 
-    //add all ships owned by player to temp UnitList and sorts with UnitSort
+    //add all ships owned by player to temp UnitList and sorts with UnitCombatResourceComparator
     public UnitList getAllShipsInGalaxyByOwnerSorted(Player player) {
         UnitList unitList = new UnitList();
         //add all ships in galaxy owned by player to temp UnitList
         for (Ships ship : this.getAllShipsInGalaxy()) {
             if (ship.getOwner().equals(player)) unitList.add(ship);
         }
-        //call sort with comparator UnitSort and return list
-        unitList.sort(new UnitSort());
+        //call sort with comparator UnitCombatResourceComparator and return list
+        unitList.sort(new UnitCombatResourceComparator());
         return unitList;
     }
 
