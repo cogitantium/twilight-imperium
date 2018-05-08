@@ -2,11 +2,8 @@ package dk.aau.cs.fvejlb17.twilight.utilities;
 
 import dk.aau.cs.fvejlb17.twilight.galaxies.Galaxy;
 import dk.aau.cs.fvejlb17.twilight.galaxies.GalaxyCreator;
-import dk.aau.cs.fvejlb17.twilight.players.Player;
 import org.junit.jupiter.api.Test;
 
-import static dk.aau.cs.fvejlb17.twilight.utilities.WriteGameStateToFile.FilesystemConstants.OUTPUTDIR;
-import static dk.aau.cs.fvejlb17.twilight.utilities.WriteGameStateToFile.FilesystemConstants.PLANETARYCONTROLFILE;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
@@ -20,6 +17,9 @@ class WriteGameStateToFileTest {
 
     @Test
     void createPlanetaryControlFile() {
+        //create constants for use in writing file
+        final String OUTPUTDIR = "gameData";
+        final String PLANETARYCONTROLFILE = "planetaryControlFile.txt";
 
         //create prerequisite, presetGalaxy, path to be tested and path to expected file
         Galaxy galaxy = new GalaxyCreator().createPresetGame();
@@ -47,6 +47,9 @@ class WriteGameStateToFileTest {
 
     @Test
     void createPlanetaryControlFileTestNoPlayers() {
+        //create constants for use in writing file
+        final String OUTPUTDIR = "gameData";
+        final String PLANETARYCONTROLFILE = "planetaryControlFile.txt";
 
         //create prerequisite, presetGalaxy, path to be tested and path to expected file
         Galaxy galaxy = new GalaxyCreator().createPresetGame();
