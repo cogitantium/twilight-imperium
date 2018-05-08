@@ -2,7 +2,7 @@ package dk.aau.cs.fvejlb17.twilight.units;
 
 import java.util.Comparator;
 
-public class UnitSort implements Comparator<Ships> {
+public class UnitCombatResourceComparator implements Comparator<Ships> {
 
     //compares firstly combatValue ascending then by resourceCost descending
     @Override
@@ -16,7 +16,7 @@ public class UnitSort implements Comparator<Ships> {
         //if both ships combatValue and resourceCost is equal, return 0 implying no further sorting
         if (ship1.getResourceCost() == ship2.getResourceCost()) return 0;
 
-        //if neither ship has a greater combat value than the other, return difference in resource cost
+        //if neither ship has a greater combat value than the other, return (ship2-ship1) difference in resource cost
         return ship2.getResourceCost() - ship1.getResourceCost();
 
     }

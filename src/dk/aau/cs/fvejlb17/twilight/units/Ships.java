@@ -3,6 +3,8 @@ package dk.aau.cs.fvejlb17.twilight.units;
 import dk.aau.cs.fvejlb17.twilight.players.Player;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemPosition;
 
+import java.util.Objects;
+
 public abstract class Ships implements Units {
 
     private final Player owner;
@@ -19,6 +21,14 @@ public abstract class Ships implements Units {
         this.combatValue = combatValue;
         this.movementSpeed = movementSpeed;
         this.capacity = capacity;
+    }
+
+    public SystemPosition getSystemPosition() {
+        return systemPosition;
+    }
+
+    public void setSystemPosition(SystemPosition systemPosition) {
+        this.systemPosition = systemPosition;
     }
 
     @Override
@@ -46,11 +56,20 @@ public abstract class Ships implements Units {
         return capacity;
     }
 
-    public SystemPosition getSystemPosition() {
-        return systemPosition;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ships ships = (Ships) o;
+        return getResourceCost() == ships.getResourceCost() &&
+                getCombatValue() == ships.getCombatValue() &&
+                getMovementSpeed() == ships.getMovementSpeed() &&
+                getCapacity() == ships.getCapacity() &&
+                Objects.equals(getOwner(), ships.getOwner());
     }
 
-    public void setSystemPosition(SystemPosition systemPosition) {
-        this.systemPosition = systemPosition;
+    @Override
+    public int hashCode() {
+        return Objects.hash(getOwner(), getResourceCost(), getCombatValue(), getMovementSpeed(), getCapacity());
     }
 }

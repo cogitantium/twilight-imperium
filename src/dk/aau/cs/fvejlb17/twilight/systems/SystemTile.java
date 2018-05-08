@@ -3,8 +3,8 @@ package dk.aau.cs.fvejlb17.twilight.systems;
 import dk.aau.cs.fvejlb17.twilight.planets.Planet;
 import dk.aau.cs.fvejlb17.twilight.planets.PlanetList;
 import dk.aau.cs.fvejlb17.twilight.players.Player;
-import dk.aau.cs.fvejlb17.twilight.units.Ships;
-import dk.aau.cs.fvejlb17.twilight.units.UnitList;
+import dk.aau.cs.fvejlb17.twilight.players.PlayerList;
+import dk.aau.cs.fvejlb17.twilight.units.*;
 
 import java.util.ArrayList;
 
@@ -36,7 +36,13 @@ public class SystemTile {
 
     public SystemTile(UnitList unitList, PlanetList planetsInSystem) {
         this.shipsInSystem = unitList;
+        calculatePlanetaryControl();
         this.planetsInSystem = planetsInSystem;
+    }
+
+    public SystemTile(UnitList unitList) {
+        this.shipsInSystem = unitList;
+        calculatePlanetaryControl();
     }
 
     public SystemTile(SystemPosition systemPosition) {
@@ -46,6 +52,84 @@ public class SystemTile {
 
     public SystemTile(PlanetList planetsInSystem) {
         this.planetsInSystem = planetsInSystem;
+    }
+
+    public Player resolveSpaceBattle(Player playerOne, Player playerTwo) {
+
+        //if no ships reside in system, a space battle cannot occur
+        if (shipsInSystem.isEmpty()) return null;
+
+        //check if space battle can occur, this happens when two and only two players have ships in the same system
+        //initialise variable to 1, as we know SystemTile is not empty, thus at least one player with ships exists
+        int numOfPlayersWithShipsInSystem = 1;
+
+        //create PlayerList and add first ship's owner to list
+        PlayerList playerList = new PlayerList();
+        playerList.add(this.getAllShipsInSystemTile().get(0).getOwner());
+
+        for (Ships ship : this.getAllShipsInSystemTile()) {
+            //if ship encountered in system belongs to neither player supplied,
+            //then space battle cannot occur between players supplied, return null
+            if (!(ship.getOwner() == playerOne || ship.getOwner() == playerTwo)) return null;
+            //if playerList doesn't contain current ships owner, add owner to playerList and increment running tally
+            if (!playerList.contains(ship.getOwner())) {
+                playerList.add(ship.getOwner());
+                numOfPlayersWithShipsInSystem++;
+            }
+        }
+
+        //if numOfPlayersWithShipsInSystem is different from 2, space battle cannot happen, return null
+        if (!(numOfPlayersWithShipsInSystem == 2)) return null;
+
+        //as space battle is imminent, find and create UnitList of each player's ships from this system
+        UnitList playerOneFleet = getAllShipsInSystemOwnedBy(playerOne);
+        UnitList playerTwoFleet = getAllShipsInSystemOwnedBy(playerTwo);
+
+        //sort UnitLists of player's fleets in ascending resourceCost, anticipating destroyed ships
+        playerOneFleet.sort(new UnitResourceComparator());
+        playerTwoFleet.sort(new UnitResourceComparator());
+
+        //conduct space battle while both players has fleets
+        while (!playerOneFleet.isEmpty() && !playerTwoFleet.isEmpty()) {
+
+            //roll hits for both players
+            int playerOneHits = playerOneFleet.getNumHitsFromFleet();
+            int playerTwoHits = playerTwoFleet.getNumHitsFromFleet();
+
+            //for any hits playerOne got and if playerTwo still has a fleet, remove destroyed ships
+            for (int i = 0; i < playerOneHits && !playerTwoFleet.isEmpty(); i++) {
+                //utilise leave-method to remove ship from system with lowest resourceCost
+                // and recalculate controlling player state on-the-fly
+                this.shipLeaveSystemTile(playerTwoFleet.get(0));
+                //remove method local copy of ship
+                playerTwoFleet.remove(0);
+            }
+
+            //for any hits playerOne got and if playerTwo still has a fleet, remove destroyed ships
+            for (int i = 0; i < playerTwoHits && !playerOneFleet.isEmpty(); i++) {
+                //utilise leave-method to remove ship from system with lowest resourceCost
+                // and recalculate controlling player state on-the-fly
+                this.shipLeaveSystemTile(playerOneFleet.get(0));
+                //remove method local copy of ship
+                playerOneFleet.remove(0);
+            }
+        }
+
+        //if both player's fleets are destroyed, no victor has emerged
+        if (playerOneFleet.isEmpty() && playerTwoFleet.isEmpty()) return null;
+
+        //if playerOne's fleet is empty, playerTwo must've won, or vice versa
+        if (playerOneFleet.isEmpty()) return playerTwo;
+        else return playerOne;
+    }
+
+    //for all ships in system, if owner equals parameter player, build UnitList and return built UnitList
+    public UnitList getAllShipsInSystemOwnedBy(Player player) {
+        UnitListBuilder unitListBuilder = new UnitListBuilder();
+        for (Ships ship : this.shipsInSystem) {
+            if (ship.getOwner().equals(player)) unitListBuilder.addUnit(ship);
+        }
+        return unitListBuilder.build();
     }
 
     public SystemPosition getSystemPosition() {
@@ -124,7 +208,7 @@ public class SystemTile {
 
     public boolean shipEnterSystemTile(Ships ship) {
         if (this.shipsInSystem.add(ship)) {
-            //since ships has modified in SystemTile, planetary control is subject to change and must be recalculated
+            //since ships has been modified in SystemTile, planetary control is subject to change and must be recalculated
             this.calculatePlanetaryControl();
             return true;
         }
@@ -133,7 +217,7 @@ public class SystemTile {
 
     public boolean shipLeaveSystemTile(Ships ship) {
         if (this.shipsInSystem.remove(ship)) {
-            //since ships has modified in SystemTile, planetary control is subject to change and must be recalculated
+            //since ships has been modified in SystemTile, planetary control is subject to change and must be recalculated
             this.calculatePlanetaryControl();
             return true;
         }
