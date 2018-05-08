@@ -1,0 +1,10 @@
+Planetary control output of Galaxy{systemTilesInGalaxy=7, playersInGalaxy=2}
+Blue Player: Crassus (The Emirates of Hacan)
+SystemTile at: SystemPositionC
+	Mecatol Rex
+
+Red Player: Pompey (Federation of Sol)
+SystemTile at: SystemPositionN
+	Vega Minor
+	Vega Major
+

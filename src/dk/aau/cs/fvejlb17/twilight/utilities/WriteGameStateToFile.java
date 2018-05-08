@@ -11,18 +11,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-import static dk.aau.cs.fvejlb17.twilight.utilities.WriteGameStateToFile.FilesystemConstants.OUTPUTDIR;
-import static dk.aau.cs.fvejlb17.twilight.utilities.WriteGameStateToFile.FilesystemConstants.PLANETARYCONTROLFILE;
-
 public class WriteGameStateToFile {
 
-    class FilesystemConstants {
-        static final String OUTPUTDIR = "gameData";
-        static final String PLANETARYCONTROLFILE = "planetaryControlFile.txt";
-    }
-
     public static void createPlanetaryControlFile(Galaxy galaxy) throws IOException {
-        //TODO should be tested, at least naïvely
+        //create constants for use in writing file
+        final String OUTPUTDIR = "gameData";
+        final String PLANETARYCONTROLFILE = "planetaryControlFile.txt";
+
         //create output directory if it doesn't exist
         if (!Files.exists(Paths.get(OUTPUTDIR))) Files.createDirectory(Paths.get(OUTPUTDIR));
 
@@ -39,7 +34,7 @@ public class WriteGameStateToFile {
         // returns after printing warning message
         if (galaxy.getPlayersInGalaxy().isEmpty()) {
             byte[] errorMessage =
-                    "WARNING: Galaxy does not contain any players, any output is irrelevant!".getBytes("UTF-8");
+                    "WARNING: Galaxy does not contain any players, any output is irrelevant!\n".getBytes("UTF-8");
             Files.write(planetaryControlFile, errorMessage, StandardOpenOption.APPEND);
             return;
         }

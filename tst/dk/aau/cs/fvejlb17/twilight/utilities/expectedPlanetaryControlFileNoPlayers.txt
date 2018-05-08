@@ -1,0 +1,2 @@
+Planetary control output of Galaxy{systemTilesInGalaxy=7, playersInGalaxy=0}
+WARNING: Galaxy does not contain any players, any output is irrelevant!

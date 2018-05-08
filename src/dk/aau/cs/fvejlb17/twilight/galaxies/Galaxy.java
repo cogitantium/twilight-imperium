@@ -32,7 +32,7 @@ public class Galaxy {
     }
 
     //for all SystemTiles add all Ships to allShipsInGalaxy
-    private UnitList getAllShipsInGalaxy() {
+    public UnitList getAllShipsInGalaxy() {
         UnitList allShipsInGalaxy = new UnitList();
         for (SystemTile systemTile : systemTilesInGalaxy) {
             allShipsInGalaxy.addAll(systemTile.getAllShipsInSystemTile());
