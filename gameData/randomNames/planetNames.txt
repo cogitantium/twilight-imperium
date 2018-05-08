@@ -18,4 +18,3 @@ Faunus
 Hercalor
 Tiamat
 Rigel I
-Mecatol Rex
