@@ -79,7 +79,7 @@ public class Galaxy {
     }
 
     //for any SystemTiles in Galaxy, return boolean of contains planets and is greater than maxNumOfPlanets
-    private boolean numPlanetsInAnySystemTilesExceeds(int maxNumOfPlanets) throws GalaxyContainsSystemWithPlanetNumExceedingLimitException {
+    public boolean numPlanetsInAnySystemTilesExceeds(int maxNumOfPlanets) throws GalaxyContainsSystemWithPlanetNumExceedingLimitException {
         for (SystemTile systemTile : this.systemTilesInGalaxy) {
             if (systemTile.containsPlanets() && systemTile.getNumOfPlanetsInSystemTile() > maxNumOfPlanets)
                 throw new GalaxyContainsSystemWithPlanetNumExceedingLimitException(maxNumOfPlanets);
