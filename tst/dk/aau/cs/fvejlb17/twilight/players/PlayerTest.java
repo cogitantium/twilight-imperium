@@ -33,4 +33,26 @@ class PlayerTest {
         assertEquals(hash, player01.hashCode());
 
     }
+
+    //caution: tests below doesn't give any hits in Player
+    @Test
+    void getName() {
+        Player player01 = new Player("Player01", "Race01", "Red");
+
+        assertEquals("Player01", player01.getName());
+    }
+
+    @Test
+    void getRace() {
+        Player player01 = new Player("Player01", "Race01", "Red");
+
+        assertEquals("Race01", player01.getRace());
+    }
+
+    @Test
+    void getColour() {
+        Player player01 = new Player("Player01", "Race01", "Red");
+
+        assertEquals("Red", player01.getColour());
+    }
 }
