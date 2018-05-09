@@ -130,4 +130,108 @@ class GalaxyCreatorTest {
         }
         assertTrue(numSystemsWithShips >= 2);
     }
+
+    @Test
+    void createRandomGameShipSwitch1() {
+
+        Galaxy galaxy = new GalaxyCreator().createRandomGame(6);
+
+        //assert that center system contains only one planet, and planetName is Mecatol Rex.
+        //utilises the fact, that center system was added last
+        assertEquals(SystemPosition.C, galaxy.getAllSystemsInGalaxy().get(galaxy.getAllSystemsInGalaxy().size() - 1).getSystemPosition());
+
+        //assert total number of systems is 7
+        assertTrue(galaxy.getAllSystemsInGalaxy().size() == 7);
+
+        //assert that no system has more than three planets in it
+        for (SystemTile systemTile : galaxy.getAllSystemsInGalaxy()) {
+            assertTrue(systemTile.getAllPlanetsInSystemTile().size() <= 3);
+        }
+
+        //assert that at least two systems has units in it
+        int numSystemsWithShips = 0;
+        for (SystemTile systemTile : galaxy.getAllSystemsInGalaxy()) {
+            //if system is not empty, increment numSystemsWithShips
+            if (!systemTile.getAllShipsInSystemTile().isEmpty()) numSystemsWithShips++;
+        }
+        assertTrue(numSystemsWithShips >= 2);
+    }
+
+    @Test
+    void createRandomGameShipSwitch2() {
+
+        Galaxy galaxy = new GalaxyCreator().createRandomGame(6);
+
+        //assert that center system contains only one planet, and planetName is Mecatol Rex.
+        //utilises the fact, that center system was added last
+        assertEquals(SystemPosition.C, galaxy.getAllSystemsInGalaxy().get(galaxy.getAllSystemsInGalaxy().size() - 1).getSystemPosition());
+
+        //assert total number of systems is 7
+        assertTrue(galaxy.getAllSystemsInGalaxy().size() == 7);
+
+        //assert that no system has more than three planets in it
+        for (SystemTile systemTile : galaxy.getAllSystemsInGalaxy()) {
+            assertTrue(systemTile.getAllPlanetsInSystemTile().size() <= 3);
+        }
+
+        //assert that at least two systems has units in it
+        int numSystemsWithShips = 0;
+        for (SystemTile systemTile : galaxy.getAllSystemsInGalaxy()) {
+            //if system is not empty, increment numSystemsWithShips
+            if (!systemTile.getAllShipsInSystemTile().isEmpty()) numSystemsWithShips++;
+        }
+        assertTrue(numSystemsWithShips >= 2);
+    }
+
+    @Test
+    void createRandomGameShipSwitch3() {
+
+        Galaxy galaxy = new GalaxyCreator().createRandomGame(6);
+
+        //assert that center system contains only one planet, and planetName is Mecatol Rex.
+        //utilises the fact, that center system was added last
+        assertEquals(SystemPosition.C, galaxy.getAllSystemsInGalaxy().get(galaxy.getAllSystemsInGalaxy().size() - 1).getSystemPosition());
+
+        //assert total number of systems is 7
+        assertTrue(galaxy.getAllSystemsInGalaxy().size() == 7);
+
+        //assert that no system has more than three planets in it
+        for (SystemTile systemTile : galaxy.getAllSystemsInGalaxy()) {
+            assertTrue(systemTile.getAllPlanetsInSystemTile().size() <= 3);
+        }
+
+        //assert that at least two systems has units in it
+        int numSystemsWithShips = 0;
+        for (SystemTile systemTile : galaxy.getAllSystemsInGalaxy()) {
+            //if system is not empty, increment numSystemsWithShips
+            if (!systemTile.getAllShipsInSystemTile().isEmpty()) numSystemsWithShips++;
+        }
+        assertTrue(numSystemsWithShips >= 2);
+    }
+
+    @Test
+    void createRandomGameShipSwitch4() {
+
+        Galaxy galaxy = new GalaxyCreator().createRandomGame(6);
+
+        //assert that center system contains only one planet, and planetName is Mecatol Rex.
+        //utilises the fact, that center system was added last
+        assertEquals(SystemPosition.C, galaxy.getAllSystemsInGalaxy().get(galaxy.getAllSystemsInGalaxy().size() - 1).getSystemPosition());
+
+        //assert total number of systems is 7
+        assertTrue(galaxy.getAllSystemsInGalaxy().size() == 7);
+
+        //assert that no system has more than three planets in it
+        for (SystemTile systemTile : galaxy.getAllSystemsInGalaxy()) {
+            assertTrue(systemTile.getAllPlanetsInSystemTile().size() <= 3);
+        }
+
+        //assert that at least two systems has units in it
+        int numSystemsWithShips = 0;
+        for (SystemTile systemTile : galaxy.getAllSystemsInGalaxy()) {
+            //if system is not empty, increment numSystemsWithShips
+            if (!systemTile.getAllShipsInSystemTile().isEmpty()) numSystemsWithShips++;
+        }
+        assertTrue(numSystemsWithShips >= 2);
+    }
 }
