@@ -12,7 +12,6 @@ public abstract class Ships implements Units {
     private final int combatValue;
     private final int movementSpeed;
     private final int capacity;
-    //SystemPosition of ship is only set when constructing SystemTile and changed when moving ship
     private SystemPosition systemPosition;
 
     Ships(Player owner, int resourceCost, int combatValue, int movementSpeed, int capacity) {

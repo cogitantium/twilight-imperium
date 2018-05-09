@@ -7,7 +7,7 @@ import dk.aau.cs.fvejlb17.twilight.players.PlayerList;
 import dk.aau.cs.fvejlb17.twilight.units.Ships;
 import dk.aau.cs.fvejlb17.twilight.units.UnitList;
 import dk.aau.cs.fvejlb17.twilight.units.UnitListBuilder;
-import dk.aau.cs.fvejlb17.twilight.units.UnitResourceComparator;
+import dk.aau.cs.fvejlb17.twilight.units.comparators.UnitResourceComparator;
 
 import java.util.ArrayList;
 

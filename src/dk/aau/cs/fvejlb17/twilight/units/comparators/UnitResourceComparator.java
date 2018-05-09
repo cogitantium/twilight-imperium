@@ -1,4 +1,6 @@
-package dk.aau.cs.fvejlb17.twilight.units;
+package dk.aau.cs.fvejlb17.twilight.units.comparators;
+
+import dk.aau.cs.fvejlb17.twilight.units.Ships;
 
 import java.util.Comparator;
 

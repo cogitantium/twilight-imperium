@@ -56,10 +56,6 @@ class SystemTileTest {
     }
 
     @Test
-    void containsPlanets() {
-    }
-
-    @Test
     void calculatePlanetaryControl() {
         //create sensible preset game and assert legality
         Galaxy presetGalaxy = new GalaxyCreator().createPresetGame();
@@ -74,15 +70,15 @@ class SystemTileTest {
             //for all planets in SystemTileList
             for (Planet planet : systemTile.getAllPlanetsInSystemTile()) {
                 switch (systemTile.getSystemPosition()) {
-                //if SystemTile is located in C, controlling player is expected to be Crassus
+                    //if SystemTile is located in C, controlling player is expected to be Crassus
                     case C:
                         assertTrue(planet.getControllingPlayer().equals(playerCrassus));
                         break;
-                        //if SystemTile is located in N, controlling player is expected to be Pompey
+                    //if SystemTile is located in N, controlling player is expected to be Pompey
                     case N:
                         assertTrue(planet.getControllingPlayer().equals(playerPompey));
                         break;
-                        //if SystemTile is not located in C or N, controlling player is expected to be null
+                    //if SystemTile is not located in C or N, controlling player is expected to be null
                     default:
                         assertTrue(planet.getControllingPlayer() == null);
                         break;

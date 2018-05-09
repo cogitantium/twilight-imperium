@@ -1,16 +1,14 @@
 package dk.aau.cs.fvejlb17.twilight.galaxies;
 
 import dk.aau.cs.fvejlb17.twilight.planets.Planet;
-import dk.aau.cs.fvejlb17.twilight.players.Player;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemPosition;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemTile;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemTileList;
 import dk.aau.cs.fvejlb17.twilight.units.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GalaxyCreatorTest {
 

@@ -3,7 +3,7 @@ package dk.aau.cs.fvejlb17.twilight.units;
 import dk.aau.cs.fvejlb17.twilight.players.Player;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ShipsTest {
 

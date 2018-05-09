@@ -7,23 +7,13 @@ public class SystemPositionListBuilder {
     private final SystemPositionList systemPositionList = new SystemPositionList();
 
     public SystemPositionListBuilder addNeighbour(SystemPosition systemPosition) {
-        try {
-            this.systemPositionList.add(systemPosition);
-        } catch (Exception e) {
-            System.out.println("ERROR: trying to add SystemPosition to SystemPositionList: "
-                    + e.getMessage());
-        }
+        this.systemPositionList.add(systemPosition);
         return this;
     }
 
-    //improve simplicity of constructor by method to add all SystemTile.SystemPosition-values
+    //improve simplicity of constructor by method to add all SystemPosition values
     public SystemPositionListBuilder addAllNeighbours() {
-        try {
-            this.systemPositionList.addAll(Arrays.asList(SystemPosition.values()));
-        } catch (Exception e) {
-            System.out.println("ERROR: trying to add SystemPosition to SystemPositionList: "
-                    + e.getMessage());
-        }
+        this.systemPositionList.addAll(Arrays.asList(SystemPosition.values()));
         return this;
     }
 

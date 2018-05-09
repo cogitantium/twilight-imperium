@@ -20,7 +20,6 @@ import java.util.List;
 public class GalaxyCreator {
 
     public Galaxy createPresetGame() {
-
         //create players and PlayerList from preset definitions
         Player playerCrassus = new Player("Crassus", "The Emirates of Hacan", "Blue");
         Player playerPompey = new Player("Pompey", "Federation of Sol", "Red");
@@ -72,31 +71,40 @@ public class GalaxyCreator {
     }
 
     public Galaxy createRandomGame(int maxNumShipsPerPlayer) {
-
         //creating random numPlayers above 2, for sensible game and below 6 for sufficient names to name players
         int numPlayers = Maths.randomBetween(2, 6);
 
-        //get String array of playerNames, playerRaces, playerColours and planetNames
+        //get String array of playerNames, playerRaces, playerColours and planetNames for random, unique attributes
         List<String> playerNames = FileReader.getLinesFromFile("names");
         List<String> playerRaces = FileReader.getLinesFromFile("races");
         List<String> playerColours = FileReader.getLinesFromFile("colours");
         List<String> planetNames = FileReader.getLinesFromFile("planets");
 
-        //TODO should avoid duplicates
         //create PlayerList to hold created players
         PlayerList playerList = new PlayerList();
+
         for (int i = 0; i < numPlayers; i++) {
+            //create indices for random attributes for removal after constructing player
+            int indexPlayerName = Maths.randomBetween(0, playerNames.size());
+            int indexPlayerRace = Maths.randomBetween(0, playerRaces.size());
+            int indexPlayerColour = Maths.randomBetween(0, playerColours.size());
+
             //for numPlayers, add new Player to PlayerList with random attributes between 0 and playerNames.size
-            playerList.add(new Player(playerNames.get(Maths.randomBetween(0, playerNames.size())),
-                    playerRaces.get(Maths.randomBetween(0, playerNames.size())),
-                    playerColours.get(Maths.randomBetween(0, playerNames.size()))));
+            playerList.add(new Player(playerNames.get(indexPlayerName),
+                    playerRaces.get(indexPlayerRace),
+                    playerColours.get(indexPlayerColour)));
+
+            //remove used attributes from list of unique attributes
+            playerNames.remove(indexPlayerName);
+            playerRaces.remove(indexPlayerRace);
+            playerColours.remove(indexPlayerColour);
         }
 
         //create random number of ships per player of at least two ships,
-        // but not above maxNumShipsPerPlayer to make random game fair
+        //but not above maxNumShipsPerPlayer to naïvely control duration of game
         int numShipsPerPlayer = Maths.randomBetween(2, maxNumShipsPerPlayer);
 
-        //create a list of UnitLists for aliasing players ships to a specific UnitList
+        //create a list of UnitLists for holding created UnitLists before adding to
         UnitListList unitListList = new UnitListList();
 
         //for numPlayers, do
@@ -144,9 +152,8 @@ public class GalaxyCreator {
             }
         }
 
-        //create SystemTileList to collect all SystemTiles created below
+        //create SystemTileList to collect all SystemTiles created below for creating new Galaxy
         SystemTileList systemTileList = new SystemTileList();
-
 
         //for all SystemTiles but centerSystem, do
         for (int i = 0; i < 6; i++) {
@@ -154,7 +161,6 @@ public class GalaxyCreator {
 
             //randomly between 0 and 3, create planets
             for (int j = 0; j < Maths.randomBetween(0, 3); j++) {
-
                 //pick a name from planetNames and store index in variable
                 int index = Maths.randomBetween(0, planetNames.size());
                 //create new Planet with chosen planetName and random resource production
@@ -163,8 +169,8 @@ public class GalaxyCreator {
                 planetNames.remove(index);
             }
 
-            //if a players units are yet to be assigned a SystemTile,
-            // create SystemTile with first UnitList and remove UnitList from unitListList
+            //if a player's units are yet to be assigned a SystemTile,
+            //create a SystemTile with first UnitList and remove first UnitList from unitListList
             if (!unitListList.isEmpty()) {
                 systemTileList.add(new SystemTile(unitListList.get(0), planetListBuilder.build()));
                 unitListList.remove(0);
@@ -172,11 +178,10 @@ public class GalaxyCreator {
                 //create SystemTile with generated planets and add it to systemTileList if no UnitLists remain
                 systemTileList.add(new SystemTile(planetListBuilder.build()));
             }
-
         }
 
         //manually create array of SystemPositions for randomly assigning position to generated SystemTiles
-        //this case of hardcoding values is not optimal and would be avoided with more time
+        //this case of hardcoding values is not optimal and could be avoided with different cardinal design or more time
         ArrayList<SystemPosition> systemPositionsArray = new ArrayList<>();
         systemPositionsArray.add(SystemPosition.N);
         systemPositionsArray.add(SystemPosition.NE);
@@ -185,8 +190,8 @@ public class GalaxyCreator {
         systemPositionsArray.add(SystemPosition.SW);
         systemPositionsArray.add(SystemPosition.NW);
 
-        //assign random SystemPosition to each SystemTile in systemTileList, letting setSystemPosition method
-        //correctly calculate neighbour SystemPositions
+        //assign random SystemPosition to each SystemTile in systemTileList,
+        //letting the setSystemPosition method call calculateAndSetNeighbourPositions for congruency
         for (SystemTile systemTile : systemTileList) {
             //choose random SystemPosition between 0 and remaining SystemPositions in systemPositionArray
             int index = Maths.randomBetween(0, systemPositionsArray.size());

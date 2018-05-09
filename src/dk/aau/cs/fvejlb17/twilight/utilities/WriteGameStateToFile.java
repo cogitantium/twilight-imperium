@@ -15,15 +15,16 @@ class WriteGameStateToFile {
 
     public static void createPlanetaryControlFile(Galaxy galaxy) throws IOException {
         //create constants for use in writing file
-        final String OUTPUTDIR = "gameData";
-        final String PLANETARYCONTROLFILE = "planetaryControlFile.txt";
+        final String outputDir = "gameData";
+        final String planetaryControlFileName = "planetaryControlFile.txt";
 
         //create output directory if it doesn't exist
-        if (!Files.exists(Paths.get(OUTPUTDIR))) Files.createDirectory(Paths.get(OUTPUTDIR));
+        if (!Files.exists(Paths.get(outputDir))) Files.createDirectory(Paths.get(outputDir));
 
         //create Path for planetaryControlFile
-        Path planetaryControlFile = Paths.get(OUTPUTDIR + "/" + PLANETARYCONTROLFILE);
+        Path planetaryControlFile = Paths.get(outputDir + "/" + planetaryControlFileName);
 
+        //if planetaryControlFile already exists, delete it
         if (Files.exists(planetaryControlFile)) Files.delete(planetaryControlFile);
 
         //create header with typical information on galaxy configuration and write header to new file
@@ -31,7 +32,7 @@ class WriteGameStateToFile {
         Files.write(planetaryControlFile, header, StandardOpenOption.CREATE);
 
         //if galaxy is created with an empty PlayerList, printing further info is nonsensical,
-        // returns after printing warning message
+        //returns after printing warning message
         if (galaxy.getPlayersInGalaxy().isEmpty()) {
             byte[] errorMessage =
                     "WARNING: Galaxy does not contain any players, any output is irrelevant!\n".getBytes("UTF-8");
