@@ -2,7 +2,7 @@ package dk.aau.cs.fvejlb17.twilight.planets;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PlanetListBuilderTest {
 
@@ -20,7 +20,4 @@ class PlanetListBuilderTest {
         assertEquals(planetList01.get(0), planetList02.get(0));
     }
 
-    @Test
-    void build() {
-    }
 }

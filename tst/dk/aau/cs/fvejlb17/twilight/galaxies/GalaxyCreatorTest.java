@@ -1,11 +1,14 @@
 package dk.aau.cs.fvejlb17.twilight.galaxies;
 
 import dk.aau.cs.fvejlb17.twilight.planets.Planet;
+import dk.aau.cs.fvejlb17.twilight.systems.SystemPosition;
+import dk.aau.cs.fvejlb17.twilight.systems.SystemTile;
 import dk.aau.cs.fvejlb17.twilight.systems.SystemTileList;
 import dk.aau.cs.fvejlb17.twilight.units.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GalaxyCreatorTest {
 
@@ -29,7 +32,7 @@ class GalaxyCreatorTest {
         //assert that six ships exist in galaxy
         assertTrue(galaxy.getAllShipsInGalaxy().size() == 6);
 
-        //assert that center systemtile contains planets
+        //assert that center SystemTile contains planets
         assertTrue(systemTileList.get(0).containsPlanets());
 
         //assert that first planet in center systemTile is Mecatol Rex,
@@ -69,7 +72,7 @@ class GalaxyCreatorTest {
                 numDestroyer++;
 
 
-            //if ship found is of type Dreadnought, do
+                //if ship found is of type Dreadnought, do
             } else if (Dreadnought.class.isAssignableFrom(ship.getClass())) {
                 //assertTrue that this Dreadnought has an owner equal to player Blue
                 assertTrue(ship.getOwner().equals(galaxy.getPlayersInGalaxy().get(0)));
@@ -100,5 +103,31 @@ class GalaxyCreatorTest {
         }
         //assertTrue that the expected number of ships in northern systemTile has been found
         assertTrue(numCruisers == 2 && numCarriers == 1);
+    }
+
+    @Test
+    void createRandomGame() {
+
+        Galaxy galaxy = new GalaxyCreator().createRandomGame(6);
+
+        //assert that center system contains only one planet, and planetName is Mecatol Rex.
+        //utilises the fact, that center system was added last
+        assertEquals(SystemPosition.C, galaxy.getAllSystemsInGalaxy().get(galaxy.getAllSystemsInGalaxy().size() - 1).getSystemPosition());
+
+        //assert total number of systems is 7
+        assertTrue(galaxy.getAllSystemsInGalaxy().size() == 7);
+
+        //assert that no system has more than three planets in it
+        for (SystemTile systemTile : galaxy.getAllSystemsInGalaxy()) {
+            assertTrue(systemTile.getAllPlanetsInSystemTile().size() <= 3);
+        }
+
+        //assert that at least two systems has units in it
+        int numSystemsWithShips = 0;
+        for (SystemTile systemTile : galaxy.getAllSystemsInGalaxy()) {
+            //if system is not empty, increment numSystemsWithShips
+            if (!systemTile.getAllShipsInSystemTile().isEmpty()) numSystemsWithShips++;
+        }
+        assertTrue(numSystemsWithShips >= 2);
     }
 }

@@ -8,6 +8,6 @@ public class Maths {
 
     //returns random integer between lower and upper, seeded with unix timestamp
     public static int randomBetween(int lower, int upper) {
-        return new Random(now().getEpochSecond()).nextInt(upper-lower) + lower;
+        return new Random(now().getEpochSecond()).nextInt(upper - lower) + lower;
     }
 }

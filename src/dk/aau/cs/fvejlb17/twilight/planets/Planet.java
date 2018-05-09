@@ -8,7 +8,6 @@ public class Planet {
 
     private final String planetName;
     private final int resourceProduction;
-    //controlling player initialised to null - given more time, this would be avoided
     private Player controllingPlayer = null;
 
     public Planet(String planetName, int resourceProduction) {
@@ -24,6 +23,14 @@ public class Planet {
         return resourceProduction;
     }
 
+    public Player getControllingPlayer() {
+        return controllingPlayer;
+    }
+
+    public void setControllingPlayer(Player controllingPlayer) {
+        this.controllingPlayer = controllingPlayer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -36,13 +43,5 @@ public class Planet {
     @Override
     public int hashCode() {
         return Objects.hash(getPlanetName(), getResourceProduction());
-    }
-
-    public Player getControllingPlayer() {
-        return controllingPlayer;
-    }
-
-    public void setControllingPlayer(Player controllingPlayer) {
-        this.controllingPlayer = controllingPlayer;
     }
 }

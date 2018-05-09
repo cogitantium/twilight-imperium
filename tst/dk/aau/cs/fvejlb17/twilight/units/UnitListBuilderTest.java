@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class UnitListBuilderTest {
 
@@ -17,7 +18,8 @@ class UnitListBuilderTest {
         UnitListBuilder unitListBuilder01 = new UnitListBuilder();
         UnitList unitList01 = unitListBuilder01.addUnit(carrier01).addUnit(carrier02).build();
         ArrayList<Ships> unitList02 = new ArrayList<>();
-        unitList02.add(carrier01); unitList02.add(carrier02);
+        unitList02.add(carrier01);
+        unitList02.add(carrier02);
 
         assertEquals(carrier01, unitList01.get(0));
         assertEquals(carrier02, unitList01.get(1));

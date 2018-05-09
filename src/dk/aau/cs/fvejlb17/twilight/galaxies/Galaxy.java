@@ -7,7 +7,7 @@ import dk.aau.cs.fvejlb17.twilight.players.PlayerList;
 import dk.aau.cs.fvejlb17.twilight.systems.*;
 import dk.aau.cs.fvejlb17.twilight.units.Ships;
 import dk.aau.cs.fvejlb17.twilight.units.UnitList;
-import dk.aau.cs.fvejlb17.twilight.units.UnitSort;
+import dk.aau.cs.fvejlb17.twilight.units.comparators.UnitCombatResourceComparator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -31,16 +31,15 @@ public class Galaxy {
         return systemTilesInGalaxy;
     }
 
-    //for all SystemTiles add all Ships to allShipsInGalaxy
     public UnitList getAllShipsInGalaxy() {
         UnitList allShipsInGalaxy = new UnitList();
+        //for all SystemTiles add all Ships to allShipsInGalaxy
         for (SystemTile systemTile : systemTilesInGalaxy) {
             allShipsInGalaxy.addAll(systemTile.getAllShipsInSystemTile());
         }
         return allShipsInGalaxy;
     }
 
-    //for all SystemTiles add all Planets to allPlanetsInGalaxy
     private PlanetList getAllPlanetsInGalaxy() {
         PlanetList allPlanetsInGalaxy = new PlanetList();
         //for all SystemTiles, if SystemTile contains planets, add all planets and catch NPE if unexpected
@@ -56,28 +55,19 @@ public class Galaxy {
         return allPlanetsInGalaxy;
     }
 
-    //search galaxy for ship, if at least one equals, return true
-    public boolean galaxyContainsShips(Ships ship) {
-        for (SystemTile systemTile : this.getAllSystemsInGalaxy()) {
-            if (systemTile.getAllShipsInSystemTile().contains(ship)) return true;
-        }
-        return false;
-    }
-
     private boolean containsDuplicatePlanets() throws GalaxyContainsDuplicatePlanetsException {
-        //create hashset with initialCapacity of number of Planets in galaxy
-        Set<Integer> planetHashcodes = new HashSet<>(getAllPlanetsInGalaxy().size());
+        //create HashSet with initialCapacity of number of Planets in galaxy
+        Set<Integer> planetHashes = new HashSet<>(getAllPlanetsInGalaxy().size());
         //for all Planets add to HashSet and throw exception if add-method returns false, implying duplicate
         for (Planet srcPlanet : this.getAllPlanetsInGalaxy()) {
-            if (!planetHashcodes.add(srcPlanet.hashCode()))
+            if (!planetHashes.add(srcPlanet.hashCode()))
                 throw new GalaxyContainsDuplicatePlanetsException(srcPlanet.getPlanetName());
         }
         return true;
     }
 
-    //naïve search for planet by planetName
+    //naïve search for planet by planetName, as planetResourceProduction might differ
     private boolean containsPlanet(String targetPlanetName) throws GalaxyDoesNotContainPlanetException {
-
         //create ArrayList of planetName and add all planetNames in Galaxy
         ArrayList<String> planetNames = new ArrayList<>();
         for (Planet srcPlanet : this.getAllPlanetsInGalaxy()) {
@@ -133,7 +123,7 @@ public class Galaxy {
                             else return false;
                     }
 
-                //check if system containsAll with expected neighbours, if true, break and continue, else return false
+                    //check if system containsAll with expected neighbours, if true, break and continue, else return false
                 case N:
                     if (systemTile.getNeighbourSystemTiles().containsAll(expectedNeighboursN)) break;
                     else throw new GalaxyCardinalPositionException(systemTile.getSystemPosition().toString());
@@ -152,7 +142,7 @@ public class Galaxy {
                 case NW:
                     if (systemTile.getNeighbourSystemTiles().equals(expectedNeighboursNW)) break;
                     else throw new GalaxyCardinalPositionException();
-                //if no case is matched, we've gotten an unknown system
+                    //if no case is matched, we've gotten an unknown system
                 default:
                     throw new GalaxyCardinalPositionException("FATAL", "Unknown SystemPosition encountered!");
             }
@@ -162,7 +152,6 @@ public class Galaxy {
 
     //tie all relevant Galaxy-methods together for legality check of defined properties
     public boolean checkGalaxyLegality() {
-
         //assume all properties are false and try/catch each property through method calls
         boolean containsMecatolRex = false;
         try {
@@ -177,7 +166,7 @@ public class Galaxy {
             System.out.println(e.getMessage());
         }
 
-        //assuming opposite proposition, as method checks whether any system exceeds
+        //assuming opposite proposition, as method checks whether any system exceeds, not if it's within bounds
         boolean noSystemExceedsThreePlanets = true;
         try {
             noSystemExceedsThreePlanets = numPlanetsInAnySystemTilesExceeds(3);
@@ -192,22 +181,23 @@ public class Galaxy {
             System.out.println(e.getMessage());
         }
 
-        //utilising short-circuiting for returning appropriate boolean to proposition
+        //utilise short-circuiting for returning appropriate boolean to proposition
         return containsMecatolRex && noDuplicatePlanets && !noSystemExceedsThreePlanets && congruentCardinalPositions;
     }
 
-    //add all ships owned by player to temp UnitList and sorts with UnitSort
+    //add all ships owned by player to temp UnitList and sorts with UnitCombatResourceComparator
     public UnitList getAllShipsInGalaxyByOwnerSorted(Player player) {
         UnitList unitList = new UnitList();
         //add all ships in galaxy owned by player to temp UnitList
         for (Ships ship : this.getAllShipsInGalaxy()) {
             if (ship.getOwner().equals(player)) unitList.add(ship);
         }
-        //call sort with comparator UnitSort and return list
-        unitList.sort(new UnitSort());
+        //call sort with comparator UnitCombatResourceComparator and return list
+        unitList.sort(new UnitCombatResourceComparator());
         return unitList;
     }
 
+    //overridden for usage in printing PlanetaryControlFile
     @Override
     public String toString() {
         return "Galaxy{" +

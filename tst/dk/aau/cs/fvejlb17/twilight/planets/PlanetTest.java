@@ -2,13 +2,10 @@ package dk.aau.cs.fvejlb17.twilight.planets;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PlanetTest {
-
-    @Test
-    void getPlanetName() {
-    }
 
     @Test
     void equalsTest() {

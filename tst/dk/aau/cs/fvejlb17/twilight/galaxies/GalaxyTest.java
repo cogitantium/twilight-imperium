@@ -5,10 +5,6 @@ import org.junit.jupiter.api.Test;
 class GalaxyTest {
 
     @Test
-    void getAllShipsInGalaxy() {
-    }
-
-    @Test
     void galaxyContainsShips() {
     }
 

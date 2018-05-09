@@ -4,13 +4,13 @@ import dk.aau.cs.fvejlb17.twilight.galaxies.Galaxy;
 import dk.aau.cs.fvejlb17.twilight.galaxies.GalaxyCreator;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class WriteGameStateToFileTest {

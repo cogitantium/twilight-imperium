@@ -5,7 +5,7 @@ import dk.aau.cs.fvejlb17.twilight.players.Player;
 public class Dreadnought extends Ships {
 
     public Dreadnought(Player owner) {
-        //hardcoding values for dreadnought
+        //hardcoding values for according to documentation
         super(owner, 5, 5, 1, 0);
     }
 }

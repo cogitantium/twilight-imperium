@@ -15,8 +15,8 @@ public class SystemTileList extends ArrayList<SystemTile> {
             //add ship to destination SystemTile and remove from source, utilising short-circuiting to avoid phantom ship or missing ship
             return destSystemTile.shipEnterSystemTile(ship) && sourceSystemTile.shipLeaveSystemTile(ship);
 
-        //if sourceSystemTiles neighbours contains destSystemTiles position and ship has a movementSpeed of one move is legal,
-        //ship is then moved and if both methods return true, move has successfully occurred, utilises same short-circuiting as above
+            //if sourceSystemTiles neighbours contains destSystemTiles position and ship has a movementSpeed of one move is legal,
+            //ship is then moved and if both methods return true, move has successfully occurred, utilises same short-circuiting as above
         } else return sourceSystemTile.getNeighbourSystemTiles().contains(destSystemTile.getSystemPosition())
                 && ship.getMovementSpeed() == 1 && destSystemTile.shipEnterSystemTile(ship) && sourceSystemTile.shipLeaveSystemTile(ship);
     }

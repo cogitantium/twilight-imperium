@@ -1,6 +1,5 @@
 package dk.aau.cs.fvejlb17.twilight.players;
 
-import dk.aau.cs.fvejlb17.twilight.players.Player;
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
