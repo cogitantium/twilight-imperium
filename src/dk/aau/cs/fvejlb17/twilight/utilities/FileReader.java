@@ -13,7 +13,7 @@ public class FileReader {
     public static List<String> getLinesFromFile(String type) {
         //declare constants of charset, source directory and initialise file-String
         String file;
-        final String directory = "gameData/randomNames/";
+        final String directory = "src/dk/aau/cs/fvejlb17/twilight/utilities/randomstrings/";
         final Charset charset = Charset.forName("UTF-8");
 
         //switch for type of sample strings wanted by method parameter
